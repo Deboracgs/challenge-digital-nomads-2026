@@ -1,135 +1,105 @@
 # Cidade Resiliente
 
-Projeto do grupo **Digital Nomads** · Front-End Design · Challenge Sprint 2 · Juiz de Fora/MG.
+App de prevenção a desastres para Juiz de Fora/MG. Ele avisa os moradores de áreas de risco antes de chuvas fortes e leva cada um até o abrigo mais próximo. Quando não há risco, o app mantém o bairro preparado com missões simples. Do outro lado, a Defesa Civil acompanha tudo por um painel.
 
-App de prevenção a desastres para moradores de áreas de risco e para a Defesa Civil. Este repositório é o protótipo de alta fidelidade em código: HTML semântico, CSS e JavaScript puro, sem framework e sem etapa de build.
+🔗 **Acesse:** https://deboracgs.github.io/challenge-digital-nomads-2026/
 
-- **Protótipo publicado:** https://deboracgs.github.io/challenge-digital-nomads-2026/
-- **Design system e materiais da Sprint 1:** https://claude.ai/artifact/G4qN849nvuuydiSgA1apmD
-- **Fluxos, componentes por página e fluxograma:** [docs/fluxos.md](docs/fluxos.md)
-- **Componentes e estados:** [componentes.html](componentes.html)
-- **PDF da entrega:** abra [docs/entrega.html](docs/entrega.html), preencha nomes, RMs e o link do vídeo e use “Salvar como PDF”
+Projeto do grupo **Digital Nomads** para a disciplina de Front-End Design.
+
+## O que dá para fazer
+
+**Morador**
+- **Cadastro:** a pessoa informa nome, celular, bairro e por onde quer receber os alertas (app, SMS ou ligação de voz), e depois escolhe um avatar.
+- **Início (modo bairro):** mostra o nível de risco do bairro agora, a trilha de missões da semana, a rede de vizinhos e o ranking dos bairros.
+- **Missões:** registrar os bueiros da rua, com o progresso salvo. Sem internet, o registro fica guardado e pode ser enviado depois.
+- **Alerta (modo emergência):**
+  - mostra o que fazer agora e o abrigo mais próximo, com a rota a pé;
+  - tem o botão "Confirmar que estou em segurança";
+  - tem o botão "Pedir socorro", que liga para o 199.
+- **Letra grande:** versão simplificada para quem tem baixa visão, com leitura do aviso em voz alta.
+- **Perfil:** nível, conquistas e posição do bairro no ranking.
+
+**Defesa Civil**
+- **Painel:** mapa de calor da cidade, filtros por nível de risco, bairros onde agir primeiro, acionamento de vigias, lotação dos abrigos e validação de relatos de moradores.
+
+Os dados são fictícios e não há back-end: os envios são simulados no navegador.
 
 ## Como executar
 
-Não há dependências para instalar.
-
-**Opção 1 · Abrir direto:** dê dois cliques em `index.html`, ou abra qualquer `.html` no navegador.
-
-**Opção 2 · Servidor local:** recomendado, porque se comporta igual ao site publicado.
+Não há dependências nem etapa de build. É HTML, CSS e JavaScript puro.
 
 ```bash
 git clone https://github.com/Deboracgs/challenge-digital-nomads-2026.git
 cd challenge-digital-nomads-2026
 python3 -m http.server 8000
-# ou: npx serve .
 ```
 
-Depois, acesse http://localhost:8000.
+Abra http://localhost:8000. No lugar do Python, também funciona `npx serve .`, ou dar dois cliques em `index.html`.
 
-**Para ver como no celular** (o viewport prioritário): abra as ferramentas do navegador (F12), clique no ícone de celular e use 390 px de largura.
+O app foi pensado primeiro para o celular. Para ver como no celular, abra as ferramentas do navegador (F12), ative o modo de dispositivo e use 390 px de largura.
 
-## Como publicar
+O site publicado usa o GitHub Pages e se atualiza sozinho a cada push na branch `main`.
 
-O site é estático, então qualquer serviço serve. Escolha um:
+## Navegando pelo protótipo
 
-- **GitHub Pages:** no repositório, vá em *Settings → Pages → Build and deployment*, escolha *Deploy from a branch*, a branch `main` e a pasta `/ (root)`. O endereço fica `https://deboracgs.github.io/challenge-digital-nomads-2026/`.
-- **Vercel:** importe o repositório em *Add New → Project*, deixe o *Framework Preset* em *Other* e publique (não precisa de comando de build).
-- **Netlify:** use *Add new site → Import an existing project*, com o campo de build vazio e a pasta de publicação `.`.
+| Caminho | Telas |
+|---|---|
+| Cadastro | `cadastro.html` → `avatar.html` → `index.html` |
+| Alerta e abrigo | `alerta.html` → rota → `seguranca.html` (alternativo: `letra-grande.html`) |
+| Missão dos bueiros | `index.html` → `missao.html` → `perfil.html#ranking` |
 
-Antes de entregar, abra o link numa janela anônima.
+O rodapé de todas as telas tem atalhos para o cadastro, para simular um alerta, para o painel da Defesa Civil e para a página de componentes.
 
-## Os três fluxos
+O nome, o avatar e o progresso da missão ficam salvos no navegador (`localStorage`). Para começar do zero, use **Recomeçar demonstração** no fim da missão ou limpe os dados do site.
 
-Para navegar pelo protótipo, comece pelo rodapé de qualquer tela, onde estão os atalhos.
-
-| Fluxo | Persona | Caminho |
-|---|---|---|
-| **1 · Cadastro (principal)** | Cláudia | `cadastro.html` → `avatar.html` → `index.html` |
-| **2 · Alerta e abrigo** | Cláudia / Seu Joaquim | `alerta.html` (no rodapé: "Simular alerta") → rota → `seguranca.html`. Alternativo: `letra-grande.html` |
-| **3 · Missão dos bueiros** | Cláudia | `index.html` → `missao.html` → `perfil.html#ranking` |
-
-A descrição de cada fluxo (tarefa, caminhos alternativos e pontos de falha) está em [docs/fluxos.md](docs/fluxos.md).
-
-**Roteiro para testar os erros**
-- **Cadastro e avatar:** toque em Continuar com tudo vazio. Depois, digite um celular sem DDD.
-- **Missão:** toque em Registrar bueiro com o formulário vazio.
-- **Missão sem internet:** desligue a internet (F12 → *Network* → *Offline*) e registre um bueiro. O cartão fica em erro, com "Tentar de novo".
-- **Painel:** os filtros, "Acionar vigias" e "Validar/Descartar" funcionam.
-
-O nome, o avatar e o progresso da missão ficam salvos no navegador (`localStorage`). Para apresentar de novo, use **Recomeçar demonstração** no fim da missão ou limpe os dados do site.
-
-## Acessibilidade e navegação por teclado
-
-- **Pular para o conteúdo:** o primeiro Tab de cada página mostra esse link.
-- **Landmarks:** `header`, `nav` (com `aria-label`), `main` e `footer` em todas as telas. Há um `h1` por página e os headings seguem a ordem, sem pular níveis.
-- **Foco:** contorno de 3 px em teal em todo elemento focável, branco no cabeçalho escuro do painel. Nenhum `outline` é removido sem um substituto visível. No cartão interativo, o foco aparece em volta do cartão inteiro.
-- **Erros:** sempre ícone + texto, com `aria-invalid` e `aria-describedby`. O foco vai para o primeiro campo com problema.
-- **Botões desabilitados:** usam `aria-disabled="true"` e continuam no Tab.
-- **Mensagens de resultado:** usam `role="status"`, e o cartão de alerta usa `role="alert"`.
-- **Alvo de toque:** todo elemento tocável tem pelo menos 48 px.
+Detalhes de cada fluxo (personas, caminhos alternativos e pontos de falha) e o fluxograma de navegação estão em [docs/fluxos.md](docs/fluxos.md).
 
 ## Estrutura
 
 ```
-├── index.html          Início do morador (modo bairro) · Fluxos 1 e 3
-├── cadastro.html       Cadastro passo 1: dados e canais de alerta · Fluxo 1
-├── avatar.html         Cadastro passo 2: seletor de avatar · Fluxo 1
-├── missao.html         Missão: registrar bueiros · Fluxo 3
-├── perfil.html         Perfil, conquistas e ranking · Fluxo 3
-├── alerta.html         Cartão de alerta e rota até o abrigo · Fluxo 2
-├── seguranca.html      Confirmação "estou em segurança" · Fluxo 2
-├── letra-grande.html   Modo letra grande (Seu Joaquim) · Fluxo 2 alternativo
+├── index.html          Início do morador (modo bairro)
+├── cadastro.html       Cadastro, passo 1: dados e canais de alerta
+├── avatar.html         Cadastro, passo 2: escolha do avatar
+├── missao.html         Missão: registrar bueiros
+├── perfil.html         Perfil, conquistas e ranking
+├── alerta.html         Alerta da Defesa Civil e rota até o abrigo
+├── seguranca.html      Confirmação "estou em segurança"
+├── letra-grande.html   Modo letra grande
 ├── mapa.html           Mapa do bairro e abrigos
-├── painel.html         Painel da Defesa Civil (Renata)
-├── componentes.html    Componentes com todos os estados
-├── css/style.css       Único CSS: tokens, componentes, páginas e desktop
-├── js/app.js           Único JS: validação, missão, painel, leitura em voz alta
-├── docs/fluxos.md      Documentação dos fluxos e fluxograma
-├── docs/entrega.html   Página para gerar o PDF da entrega (capa, fluxos, links)
-└── img/                Logo, mascote Teto, selo e avatares (SVG)
-    ├── icones/         Ícones da interface (níveis, legenda, tabbar, erro…)
-    └── mapas/          Mapa da rota até o abrigo e mapa do painel (base + rótulos)
+├── painel.html         Painel da Defesa Civil
+├── componentes.html    Componentes do design system com todos os estados
+├── css/style.css       Estilos: tokens, componentes, páginas e desktop
+├── js/app.js           Comportamento: validação, missão, painel, leitura em voz alta
+├── docs/               Documentação dos fluxos
+└── img/                Logo, mascote Teto, selo e avatares
+    ├── icones/         Ícones da interface
+    └── mapas/          Mapa da rota e mapa do painel
 ```
 
-## Componentes com estados
+## Design system
 
-Os estados ficam em `css/style.css` e aparecem juntos em [componentes.html](componentes.html).
+O design system completo está em https://claude.ai/artifact/G4qN849nvuuydiSgA1apmD.
 
-| Componente | Classe | Onde aparece no fluxo principal |
-|---|---|---|
-| Botão (primário, secundário, socorro) | `.btn` | Continuar, Voltar, Concluir cadastro |
-| Campo de texto | `.campo` + `.campo__entrada` | Nome, celular, referência |
-| Seleção | `select.campo__entrada` | Bairro |
-| Cartão / Cartão de opção | `.cartao`, `.cartao-opcao` | Canais de alerta |
-| Seletor de avatar (composto) | `.avatares` + `.avatar-opcao` | Passo 2 do cadastro |
+- **Tokens:** cores, tamanhos de texto, espaços e raios ficam como variáveis CSS em `:root`, no início de `css/style.css`.
+- **Níveis de risco:** sempre combinam forma, cor e palavra (círculo Normal, triângulo Atenção, losango Alerta, octógono Emergência). Assim, quem não distingue cores também entende.
+- **Cores de risco:** só aparecem quando há risco. Erros de formulário usam uma cor própria (`--cor-erro`), sempre com ícone e texto.
+- **Roxo (`--cor-conquista`):** fica reservado para a parte de jogo, ou seja, nível, selos e "seu bairro".
+- **Estados:** cada componente interativo tem default, hover, focus, active, disabled e erro, e todos podem ser vistos juntos em [componentes.html](componentes.html).
+- **Mobile first:** o estilo base é o do celular, e a partir de 900 px o layout passa a duas colunas com menu no topo.
 
-Cada um tem **default, hover, focus, active, disabled e erro**. As classes `.is-hover`, `.is-focus` e `.is-active` existem só para congelar esses estados na página de documentação. No app, os estados vêm das pseudo-classes reais (`:hover`, `:focus-visible`, `:active`).
+## Acessibilidade
 
-## CSS e tokens
+- **Fonte:** Atkinson Hyperlegible, feita para baixa visão.
+- **Pular para o conteúdo:** esse link aparece no primeiro Tab de cada página.
+- **HTML semântico:** `header`, `nav`, `main` e `footer` em todas as telas, e um `h1` por página com os títulos em ordem.
+- **Foco visível:** todo elemento focável recebe um contorno de 3 px.
+- **Erros de formulário:** aparecem com ícone e texto, e o foco vai para o primeiro campo com problema.
+- **Toque:** todo elemento tocável tem pelo menos 48 px.
+- **Teclado:** tudo funciona só com o teclado, inclusive o seletor de avatar, os filtros e os botões do painel.
 
-O CSS é **mobile first**: o estilo base é o do celular, e as regras de desktop ficam no fim do arquivo, dentro de `@media (min-width: 900px)`.
+## Próximos passos
 
-- **Celular:** uma coluna e a barra de navegação inferior (`.tabbar`).
-- **Desktop:** duas colunas e o menu no topo (`.nav-principal`). A barra inferior some.
-
-Todas as cores, tamanhos de texto, espaços e raios estão como variáveis CSS em `:root`. Use sempre as variáveis, nunca o hexadecimal solto.
-
-Regras que não podem quebrar:
-- As cores de risco (`--cor-normal`, `--cor-atencao`, `--cor-alerta`, `--cor-emergencia`) só aparecem quando há risco. Erros de formulário usam `--cor-erro`, sempre com ícone e texto.
-- Em `--cor-atencao` e `--cor-alerta`, o texto é **sempre navy**.
-- O roxo (`--cor-conquista`) é só do modo bairro: nível, selos e "seu bairro".
-- Todo elemento tocável tem pelo menos 48 px (`--alvo-toque`).
-
-Os ícones são arquivos SVG em `img/`, carregados com `<img>`. Como uma imagem não herda a cor do texto, cada ícone já vem com a cor do lugar onde é usado. Por isso a barra inferior tem as versões `tab-*-ativo.svg`.
-
-## Fonte
-
-Atkinson Hyperlegible, carregada do Google Fonts no `<head>`. Para funcionar sem internet, baixe os arquivos `.woff2` (pesos 400 e 700), coloque em `fonts/` e troque o `<link>` por um `@font-face` no topo do CSS.
-
-## O que é provisório
-
-- Nomes, bairros e números são **exemplos fictícios**. Não há back-end: os envios são simulados no navegador.
-- O alerta chega por notificação no app real. No protótipo, ele é aberto pelo link "Simular alerta".
-- O mapa do painel usa o **contorno oficial do município (IBGE)**, mas a posição dos bairros é aproximada. Na versão final, troquem por um mapa real (por exemplo, Leaflet + OpenStreetMap) com os limites dos bairros da Prefeitura.
-- "Adicionar vizinho" e o canal WhatsApp aparecem desabilitados de propósito: estão previstos para a próxima versão.
+- Ligar o app a um back-end e às notificações reais da Defesa Civil.
+- Trocar o mapa ilustrativo por um mapa real, por exemplo Leaflet + OpenStreetMap, com os limites dos bairros da Prefeitura. Hoje o mapa do painel usa o contorno oficial do município (IBGE), mas a posição dos bairros é aproximada.
+- Carregar a fonte localmente para o app funcionar 100% sem internet.
+- Liberar "Adicionar vizinho" e o canal de WhatsApp, que hoje aparecem como "em breve".
