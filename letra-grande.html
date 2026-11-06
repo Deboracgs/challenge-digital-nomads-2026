@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Letra grande · Cidade Resiliente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+    <div class="app pagina-letra-grande">
+      <header class="cabecalho">
+        <div class="container cabecalho__inner">
+          <a class="marca" href="index.html">
+            <img src="img/logo.svg" alt="" width="40" height="40">
+            Cidade Resiliente
+          </a>
+          <a class="btn btn--secundario" href="index.html" style="margin-left: auto">Tela normal</a>
+        </div>
+      </header>
+
+      <main id="conteudo" class="container conteudo coluna">
+        <div class="lg-saudacao">
+          <img src="img/avatares/joaquim.svg" alt="" width="120" height="120">
+          <h1>Boa tarde, Seu Joaquim.</h1>
+        </div>
+
+        <section class="lg-status" id="aviso-atual" data-nivel="normal" aria-label="Situação agora">
+          <img src="img/icones/status-normal.svg" alt="" width="72" height="72">
+          <div>
+            <strong>Tudo normal</strong>
+            <span>Não há alerta para o Parque Burnier agora.</span>
+          </div>
+        </section>
+
+        <div class="lg-botoes">
+          <button class="btn btn--primario" type="button" data-ouvir="aviso-atual" data-erro="erro-ouvir" aria-describedby="erro-ouvir">
+            <img src="img/icones/ouvir.svg" alt="" width="36" height="36">
+            Ouvir aviso
+          </button>
+          <a class="btn btn--secundario" href="tel:">
+            <img src="img/icones/telefone.svg" alt="" width="36" height="36">
+            Ligar para a Cláudia
+          </a>
+        </div>
+        <p class="mensagem-erro" id="erro-ouvir" hidden style="font-size: 20px">
+          <img src="img/icones/erro.svg" alt="" width="18" height="18">
+          <span></span>
+        </p>
+
+        <section class="lg-abrigo">
+          <h2>Seu abrigo</h2>
+          <p>Escola Municipal (exemplo), 600 metros. A Cláudia e o Lucas são seus vigias e vão te avisar se precisar sair.</p>
+        </section>
+
+        <a class="btn btn--socorro" href="tel:199" style="align-self: flex-start">Pedir socorro · ligar 199</a>
+      </main>
+
+      <footer class="rodape">
+        <div class="container rodape__inner">
+          <span>Protótipo · Digital Nomads · dados fictícios</span>
+          <nav aria-label="Telas do protótipo">
+            <a href="cadastro.html">Cadastro</a>
+            <a href="alerta.html">Simular alerta</a>
+            <a href="painel.html">Painel da Defesa Civil</a>
+            <a href="componentes.html">Componentes</a>
+          </nav>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

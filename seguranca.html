@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Você está em segurança · Cidade Resiliente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+    <div class="app">
+      <header class="cabecalho">
+        <div class="container cabecalho__inner">
+          <a class="marca" href="index.html">
+            <img src="img/logo.svg" alt="" width="40" height="40">
+            Cidade Resiliente
+          </a>
+          <a class="btn btn--socorro" href="tel:199" style="margin-left: auto" aria-label="Pedir socorro: ligar para a Defesa Civil, 199">Pedir socorro</a>
+        </div>
+      </header>
+
+      <div class="faixa-alerta" data-nivel="alerta">
+        <div class="container faixa-alerta__inner">
+          <img src="img/icones/faixa-alerta.svg" alt="" width="28" height="28">
+          <span><strong>Alerta da Defesa Civil para Parque Burnier</strong> · 21h40</span>
+        </div>
+      </div>
+
+      <main id="conteudo" class="container conteudo conteudo--estreito coluna">
+        <section class="cartao confirmacao" aria-labelledby="titulo-seguranca">
+          <img src="img/icones/sucesso.svg" alt="" width="72" height="72">
+          <h1 id="titulo-seguranca" style="font-size: var(--texto-titulo-alerta)">Pronto, <span data-usuario="nome">Cláudia</span>. Você está em segurança.</h1>
+          <p>A Defesa Civil recebeu sua confirmação às 21h47. Fique no abrigo até o fim do alerta.</p>
+        </section>
+
+        <section class="coluna" style="gap: var(--espaco-3)" aria-labelledby="titulo-rede">
+          <h2 id="titulo-rede" style="font-size: var(--texto-subtitulo)">Avisamos sua rede de vizinhos</h2>
+          <ul class="pessoas lista-limpa">
+            <li class="pessoa">
+              <img src="img/avatares/joaquim-rosto.svg" alt="" width="48" height="48">
+              <span>
+                <strong>Seu Joaquim</strong><br>
+                <span class="texto-apoio">Recebeu ligação · ainda não confirmou</span>
+              </span>
+            </li>
+            <li class="pessoa">
+              <img src="img/avatares/lucas-rosto.svg" alt="" width="48" height="48">
+              <span>
+                <strong>Lucas</strong><br>
+                <span class="texto-apoio">Confirmou às 21h45 · está no abrigo</span>
+              </span>
+            </li>
+          </ul>
+        </section>
+
+        <div class="botoes-alerta">
+          <a class="btn btn--primario btn--grande btn--bloco" href="index.html">Voltar ao início</a>
+          <a class="btn btn--secundario btn--grande btn--bloco" href="alerta.html#rota">Ver a rota de novo</a>
+        </div>
+        <p class="texto-apoio" style="font-size: var(--texto-corpo)">A situação mudou? Use o botão <strong>Pedir socorro</strong> no topo da tela para ligar para a Defesa Civil (199).</p>
+      </main>
+
+      <footer class="rodape">
+        <div class="container rodape__inner">
+          <span>Protótipo · Digital Nomads · dados fictícios</span>
+          <nav aria-label="Telas do protótipo">
+            <a href="cadastro.html">Cadastro</a>
+            <a href="alerta.html">Simular alerta</a>
+            <a href="painel.html">Painel da Defesa Civil</a>
+            <a href="componentes.html">Componentes</a>
+          </nav>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

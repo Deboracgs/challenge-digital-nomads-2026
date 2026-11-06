@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cadastro · Cidade Resiliente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+    <div class="app">
+      <header class="cabecalho">
+        <div class="container cabecalho__inner">
+          <a class="marca" href="index.html">
+            <img src="img/logo.svg" alt="" width="40" height="40">
+            Cidade Resiliente
+          </a>
+        </div>
+      </header>
+
+      <main id="conteudo" class="container conteudo conteudo--estreito coluna">
+        <div class="passos-cadastro">
+          <a href="index.html" class="btn btn--secundario btn--amigavel" style="padding: 0 var(--espaco-4)">Voltar</a>
+          <div class="progresso">
+            <div class="progresso__barra" role="progressbar" aria-valuemin="0" aria-valuemax="2" aria-valuenow="1" aria-label="Passo 1 de 2 do cadastro"><span style="width: 50%"></span></div>
+            <span class="texto-apoio">Passo 1 de 2</span>
+          </div>
+        </div>
+
+        <div>
+          <h1 style="font-size: var(--texto-titulo-alerta)">Vamos preparar você e seu bairro</h1>
+          <p class="texto-apoio" style="font-size: var(--texto-corpo); margin-top: var(--espaco-1)">Com esses dados a Defesa Civil avisa você quando houver risco na sua rua.</p>
+        </div>
+
+        <form class="formulario" action="avatar.html" data-validar="cadastro">
+          <div class="campo">
+            <label class="campo__rotulo" for="nome">Seu nome</label>
+            <input class="campo__entrada" id="nome" name="nome" type="text" autocomplete="given-name" required minlength="2" aria-describedby="erro-nome" data-erro="erro-nome" data-erro-vazio="Digite seu nome." data-erro-curto="O nome precisa ter pelo menos 2 letras.">
+            <p class="mensagem-erro" id="erro-nome" hidden>
+              <img src="img/icones/erro.svg" alt="" width="18" height="18">
+              <span></span>
+            </p>
+          </div>
+
+          <div class="campo">
+            <label class="campo__rotulo" for="celular">Celular com DDD</label>
+            <span class="campo__dica" id="dica-celular">É por ele que chegam os alertas por SMS e ligação.</span>
+            <input class="campo__entrada" id="celular" name="celular" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(32) 99999-0000" required aria-describedby="dica-celular erro-celular" data-erro="erro-celular" data-erro-vazio="Digite seu celular com DDD.">
+            <p class="mensagem-erro" id="erro-celular" hidden>
+              <img src="img/icones/erro.svg" alt="" width="18" height="18">
+              <span></span>
+            </p>
+          </div>
+
+          <div class="campo">
+            <label class="campo__rotulo" for="bairro">Bairro onde você mora</label>
+            <select class="campo__entrada" id="bairro" name="bairro" required aria-describedby="erro-bairro" data-erro="erro-bairro" data-erro-vazio="Escolha seu bairro na lista.">
+              <option value="">Escolha o bairro</option>
+              <option value="benfica">Benfica</option>
+              <option value="centro">Centro</option>
+              <option value="grama">Grama</option>
+              <option value="linhares">Linhares</option>
+              <option value="parque-burnier">Parque Burnier</option>
+              <option value="santa-luzia">Santa Luzia</option>
+              <option value="sao-pedro">São Pedro</option>
+              <option value="vila-ideal">Vila Ideal</option>
+            </select>
+            <p class="mensagem-erro" id="erro-bairro" hidden>
+              <img src="img/icones/erro.svg" alt="" width="18" height="18">
+              <span></span>
+            </p>
+          </div>
+
+          <div class="campo">
+            <label class="campo__rotulo" for="referencia">Rua ou ponto de referência <span class="campo__opcional">(opcional)</span></label>
+            <input class="campo__entrada" id="referencia" name="referencia" type="text" autocomplete="address-line1">
+          </div>
+
+          <fieldset class="grupo" aria-describedby="dica-avisos erro-avisos" data-erro="erro-avisos" data-erro-vazio="Escolha pelo menos um jeito de receber os alertas.">
+            <legend>Como você quer receber os alertas?</legend>
+            <span class="campo__dica" id="dica-avisos">Pode marcar mais de um.</span>
+            <p class="mensagem-erro" id="erro-avisos" hidden>
+              <img src="img/icones/erro.svg" alt="" width="18" height="18">
+              <span></span>
+            </p>
+            <label class="cartao-opcao">
+              <input type="checkbox" name="avisos" value="app">
+              <span class="cartao-opcao__marca"></span>
+              <span class="cartao-opcao__texto">
+                <strong>Notificação no app</strong>
+                <span>Aparece na tela do celular com o nível de risco</span>
+              </span>
+            </label>
+            <label class="cartao-opcao">
+              <input type="checkbox" name="avisos" value="sms">
+              <span class="cartao-opcao__marca"></span>
+              <span class="cartao-opcao__texto">
+                <strong>SMS</strong>
+                <span>Chega mesmo sem internet</span>
+              </span>
+            </label>
+            <label class="cartao-opcao">
+              <input type="checkbox" name="avisos" value="voz">
+              <span class="cartao-opcao__marca"></span>
+              <span class="cartao-opcao__texto">
+                <strong>Ligação de voz</strong>
+                <span>Uma voz lê o alerta para você</span>
+              </span>
+            </label>
+            <label class="cartao-opcao">
+              <input type="checkbox" name="avisos" value="whatsapp" disabled>
+              <span class="cartao-opcao__marca"></span>
+              <span class="cartao-opcao__texto">
+                <strong>WhatsApp</strong>
+                <span>Em breve</span>
+              </span>
+            </label>
+          </fieldset>
+
+          <button class="btn btn--primario btn--amigavel btn--grande btn--bloco" type="submit">Continuar</button>
+        </form>
+      </main>
+
+      <footer class="rodape">
+        <div class="container rodape__inner">
+          <span>Protótipo · Digital Nomads · dados fictícios</span>
+          <nav aria-label="Telas do protótipo">
+            <a href="index.html">Início</a>
+            <a href="alerta.html">Simular alerta</a>
+            <a href="painel.html">Painel da Defesa Civil</a>
+            <a href="componentes.html">Componentes</a>
+          </nav>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

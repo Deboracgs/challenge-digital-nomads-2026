@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Perfil · Cidade Resiliente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+    <div class="app app--com-tabbar">
+      <header class="cabecalho">
+        <div class="container cabecalho__inner">
+          <a class="marca" href="index.html">
+            <img src="img/logo.svg" alt="" width="40" height="40">
+            Cidade Resiliente
+          </a>
+          <nav class="nav-principal" aria-label="Principal">
+            <a href="index.html">Meu bairro</a>
+            <a href="mapa.html">Mapa de risco</a>
+            <a href="missao.html">Missões</a>
+            <a href="perfil.html#ranking" aria-current="page">Ranking</a>
+            <a href="letra-grande.html">Letra grande</a>
+          </nav>
+        </div>
+      </header>
+
+      <main id="conteudo" class="container conteudo colunas colunas--iguais">
+        <section class="coluna cartao" aria-labelledby="titulo-perfil">
+          <div class="perfil-topo">
+            <img src="img/avatares/lucas.svg" alt="Avatar do Lucas com lanterna" width="160" height="160">
+            <div class="perfil-topo__info">
+              <h1 id="titulo-perfil">Lucas</h1>
+              <span class="texto-apoio" style="font-size: var(--texto-corpo)">Parque Burnier · Juiz de Fora</span>
+              <span class="pilula pilula--conquista">Nível 4 · Vigia do bairro</span>
+              <a href="avatar.html" style="font-size: var(--texto-legenda); font-weight: 700">Editar avatar</a>
+            </div>
+          </div>
+
+          <div class="progresso progresso--conquista">
+            <div style="display: flex; justify-content: space-between; font-size: var(--texto-legenda)">
+              <strong>Rumo ao nível 5</strong>
+              <span class="texto-apoio">820 de 1.000 pontos</span>
+            </div>
+            <div class="progresso__barra" role="progressbar" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="820" aria-label="Pontos para o nível 5" style="background: var(--cor-conquista-fundo)"><span style="width: 82%"></span></div>
+          </div>
+
+          <div class="numeros">
+            <div class="numero"><strong>12</strong><span>missões feitas</span></div>
+            <div class="numero"><strong>4</strong><span>riscos reportados</span></div>
+            <div class="numero"><strong>3</strong><span>vizinhos avisados</span></div>
+          </div>
+
+          <h2>Conquistas</h2>
+          <ul class="conquistas lista-limpa">
+            <li class="conquista">
+              <span class="conquista__medalha"><img src="img/icones/conquista-abrigo.svg" alt="" width="34" height="34"></span>
+              Conheço meu abrigo
+            </li>
+            <li class="conquista">
+              <span class="conquista__medalha"><img src="img/icones/conquista-reporter.svg" alt="" width="34" height="34"></span>
+              Repórter do bairro
+            </li>
+            <li class="conquista">
+              <span class="conquista__medalha"><img src="img/icones/conquista-vizinhos.svg" alt="" width="34" height="34"></span>
+              Vigia dos vizinhos
+            </li>
+            <li class="conquista conquista--bloqueada">
+              <span class="conquista__medalha"><img src="img/icones/conquista-bloqueada.svg" alt="" width="34" height="34"></span>
+              Guardião do bueiro · faltam 2
+            </li>
+          </ul>
+        </section>
+
+        <section class="coluna" id="ranking" aria-labelledby="titulo-ranking">
+          <div>
+            <h2 id="titulo-ranking" style="font-size: var(--texto-titulo-tela)">Ranking dos bairros</h2>
+            <p class="texto-apoio">Temporada de chuva · outubro a março · média de pontos por morador</p>
+          </div>
+          <img class="placa" src="img/selo-bairro-preparado.svg" alt="Placa Bairro Preparado da temporada 2026–27" width="280" height="120">
+          <ol class="ranking lista-limpa">
+            <li>
+              <span class="ranking__pos">1</span>
+              <span class="ranking__nome">São Pedro</span>
+              <span class="ranking__pts">412</span>
+            </li>
+            <li>
+              <span class="ranking__pos">2</span>
+              <span class="ranking__nome">Benfica</span>
+              <span class="ranking__pts">398</span>
+            </li>
+            <li class="ranking__seu">
+              <span class="ranking__pos">3</span>
+              <span class="ranking__nome">Parque Burnier <span class="rotulo-seu">Seu bairro</span></span>
+              <span class="ranking__pts">371</span>
+            </li>
+            <li>
+              <span class="ranking__pos">4</span>
+              <span class="ranking__nome">Santa Luzia</span>
+              <span class="ranking__pts">356</span>
+            </li>
+            <li>
+              <span class="ranking__pos">5</span>
+              <span class="ranking__nome">Linhares</span>
+              <span class="ranking__pts">340</span>
+            </li>
+          </ol>
+          <div class="dica-teto">
+            <img src="img/teto.svg" alt="" width="64" height="64">
+            <p><strong>Quase lá!</strong> Mais 28 pontos por morador e o Parque Burnier passa o Benfica. Cada risco que você reporta conta.</p>
+          </div>
+          <span class="texto-apoio">Pontos de exemplo</span>
+        </section>
+      </main>
+
+      <nav class="tabbar" aria-label="Navegação principal">
+        <a href="index.html">
+          <img src="img/icones/tab-inicio.svg" alt="" width="24" height="24">
+          Início
+        </a>
+        <a href="mapa.html">
+          <img src="img/icones/tab-mapa.svg" alt="" width="24" height="24">
+          Mapa
+        </a>
+        <a href="missao.html">
+          <img src="img/icones/tab-missoes.svg" alt="" width="24" height="24">
+          Missões
+        </a>
+        <a href="perfil.html#ranking">
+          <img src="img/icones/tab-ranking.svg" alt="" width="24" height="24">
+          Ranking
+        </a>
+        <a href="perfil.html" aria-current="page">
+          <img src="img/icones/tab-perfil-ativo.svg" alt="" width="24" height="24">
+          Perfil
+        </a>
+      </nav>
+
+      <footer class="rodape">
+        <div class="container rodape__inner">
+          <span>Protótipo · Digital Nomads · dados fictícios</span>
+          <nav aria-label="Telas do protótipo">
+            <a href="cadastro.html">Cadastro</a>
+            <a href="alerta.html">Simular alerta</a>
+            <a href="painel.html">Painel da Defesa Civil</a>
+            <a href="componentes.html">Componentes</a>
+          </nav>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

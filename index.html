@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Início · Cidade Resiliente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+    <div class="app app--com-tabbar">
+      <header class="cabecalho">
+        <div class="container cabecalho__inner">
+          <a class="marca" href="index.html">
+            <img src="img/logo.svg" alt="" width="40" height="40">
+            Cidade Resiliente
+          </a>
+          <nav class="nav-principal" aria-label="Principal">
+            <a href="index.html" aria-current="page">Meu bairro</a>
+            <a href="mapa.html">Mapa de risco</a>
+            <a href="missao.html">Missões</a>
+            <a href="perfil.html#ranking">Ranking</a>
+            <a href="letra-grande.html">Letra grande</a>
+          </nav>
+          <a class="chip-perfil" href="perfil.html" aria-label="Meu perfil, nível 3">
+            <img src="img/avatares/claudia-rosto.svg" alt="" width="36" height="36" data-usuario="rosto">
+            Nível 3
+          </a>
+        </div>
+      </header>
+
+      <div class="faixa-risco">
+        <div class="container faixa-risco__inner">
+          <span class="nivel nivel--normal">
+            <img src="img/icones/nivel-normal.svg" alt="" width="14" height="14">
+            Normal
+          </span>
+          <span>Parque Burnier, agora. Sem alertas da Defesa Civil.</span>
+        </div>
+      </div>
+
+      <main id="conteudo" class="container conteudo colunas">
+        <div class="coluna coluna--principal">
+          <section class="saudacao">
+            <img src="img/teto.svg" alt="Teto, o mascote" width="120" height="120">
+            <div>
+              <h1>Olá, <span data-usuario="nome">Cláudia</span>! Sua rua está tranquila hoje.</h1>
+              <p>Aproveite para uma missão rápida: leva menos de 10 minutos e ajuda o bairro inteiro.</p>
+            </div>
+          </section>
+
+          <section aria-labelledby="titulo-trilha">
+            <h2 id="titulo-trilha" style="font-size: var(--texto-titulo-alerta); margin-bottom: var(--espaco-3)">Trilha da semana</h2>
+            <ol class="trilha lista-limpa">
+              <li class="trilha__passo trilha__passo--feito">
+                <span class="trilha__icone"><img src="img/icones/check.svg" alt="" width="26" height="26"></span>
+                Conhecer o abrigo
+              </li>
+              <li class="trilha__passo trilha__passo--feito">
+                <span class="trilha__icone"><img src="img/icones/check.svg" alt="" width="26" height="26"></span>
+                Check-in da rua
+              </li>
+              <li class="trilha__passo trilha__passo--atual" aria-current="step">
+                <span class="trilha__icone">3</span>
+                Registrar bueiros
+              </li>
+              <li class="trilha__passo trilha__passo--bloqueado">
+                <span class="trilha__icone">4</span>
+                Avisar um vizinho
+              </li>
+              <li class="trilha__passo trilha__passo--bloqueado">
+                <span class="trilha__icone">5</span>
+                Simulado do bairro
+              </li>
+            </ol>
+          </section>
+
+          <article class="cartao missao">
+            <div class="grupo-botoes" style="align-items: center">
+              <span class="sobretitulo">Missão 3 de 5</span>
+              <span class="pilula pilula--pontos">+40 pontos</span>
+            </div>
+            <h2 style="font-size: var(--texto-titulo-alerta)">Registrar os bueiros da sua rua</h2>
+            <p>Bueiro entupido faz a rua alagar quando chove. Tire uma foto de cada um e marque no mapa. Dá para fazer junto com alguém da família.</p>
+            <div class="progresso" data-progresso="bueiros">
+              <div class="progresso__barra" role="progressbar" aria-valuemin="0" aria-valuemax="5" aria-valuenow="2" aria-label="Bueiros registrados"><span style="width: 40%"></span></div>
+              <span class="texto-apoio" data-progresso-texto>2 de 5 bueiros registrados</span>
+            </div>
+            <div class="grupo-botoes">
+              <a class="btn btn--primario btn--amigavel btn--grande" href="missao.html">Continuar missão</a>
+              <a class="btn btn--secundario btn--amigavel" href="mapa.html">Ver rota do abrigo</a>
+            </div>
+          </article>
+        </div>
+
+        <aside class="coluna coluna--lateral">
+          <section class="cartao cartao--conquista" aria-labelledby="titulo-vizinhos">
+            <span class="sobretitulo">Minha rede de vizinhos</span>
+            <h2 id="titulo-vizinhos">Quem você ajuda a avisar</h2>
+            <ul class="pessoas lista-limpa">
+              <li class="pessoa">
+                <img src="img/avatares/joaquim-rosto.svg" alt="" width="48" height="48">
+                <span>
+                  <strong>Seu Joaquim</strong><br>
+                  <span class="texto-apoio">Vizinho · sem smartphone · recebe ligação</span>
+                </span>
+              </li>
+              <li class="pessoa">
+                <img src="img/avatares/lucas-rosto.svg" alt="" width="48" height="48">
+                <span>
+                  <strong>Lucas</strong><br>
+                  <span class="texto-apoio">Filho · vigia do bairro</span>
+                </span>
+              </li>
+            </ul>
+            <button class="btn btn--secundario btn--amigavel" type="button" aria-disabled="true" aria-describedby="dica-vizinho">Adicionar vizinho</button>
+            <span class="texto-apoio" id="dica-vizinho">Disponível na próxima versão do protótipo.</span>
+          </section>
+
+          <section aria-labelledby="titulo-ranking-resumo" class="coluna" style="gap: var(--espaco-3)">
+            <h2 id="titulo-ranking-resumo" style="font-size: var(--texto-subtitulo)">Ranking dos bairros</h2>
+            <ol class="ranking lista-limpa">
+              <li>
+                <span class="ranking__pos">1</span>
+                <span class="ranking__nome">São Pedro</span>
+                <span class="ranking__pts">412</span>
+              </li>
+              <li>
+                <span class="ranking__pos">2</span>
+                <span class="ranking__nome">Benfica</span>
+                <span class="ranking__pts">398</span>
+              </li>
+              <li class="ranking__seu">
+                <span class="ranking__pos">3</span>
+                <span class="ranking__nome">Parque Burnier <span class="rotulo-seu">Seu bairro</span></span>
+                <span class="ranking__pts">371</span>
+              </li>
+            </ol>
+            <span class="texto-apoio">Média de pontos por morador · nomes e números de exemplo</span>
+          </section>
+        </aside>
+      </main>
+
+      <nav class="tabbar" aria-label="Navegação principal">
+        <a href="index.html" aria-current="page">
+          <img src="img/icones/tab-inicio-ativo.svg" alt="" width="24" height="24">
+          Início
+        </a>
+        <a href="mapa.html">
+          <img src="img/icones/tab-mapa.svg" alt="" width="24" height="24">
+          Mapa
+        </a>
+        <a href="missao.html">
+          <img src="img/icones/tab-missoes.svg" alt="" width="24" height="24">
+          Missões
+        </a>
+        <a href="perfil.html#ranking">
+          <img src="img/icones/tab-ranking.svg" alt="" width="24" height="24">
+          Ranking
+        </a>
+        <a href="perfil.html">
+          <img src="img/icones/tab-perfil.svg" alt="" width="24" height="24">
+          Perfil
+        </a>
+      </nav>
+
+      <footer class="rodape">
+        <div class="container rodape__inner">
+          <span>Protótipo · Digital Nomads · dados fictícios</span>
+          <nav aria-label="Telas do protótipo">
+            <a href="cadastro.html">Cadastro</a>
+            <a href="alerta.html">Simular alerta</a>
+            <a href="painel.html">Painel da Defesa Civil</a>
+            <a href="componentes.html">Componentes</a>
+          </nav>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

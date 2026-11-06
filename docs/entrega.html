@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Entrega Sprint 2 · Cidade Resiliente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;display=swap">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <style>
+      :root {
+        --navy: #0f2a3d;
+        --teal: #1f6f8b;
+        --roxo: #5b3f8c;
+        --superficie: #eef3f6;
+        --ceu: #dff0f5;
+        --borda: #d3dde4;
+        --texto-2: #5a6b77;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: "Atkinson Hyperlegible", Arial, sans-serif;
+        font-size: 15px;
+        line-height: 1.5;
+        color: var(--navy);
+        background: var(--superficie);
+      }
+
+      h1, h2, h3, p, ul, ol, table { margin: 0; }
+      h1, h2, h3 { line-height: 1.2; }
+      a { color: var(--teal); }
+      :focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+
+      /* Barra de instruções (some na impressão) */
+      .instrucoes {
+        position: sticky; top: 0; z-index: 5;
+        display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px;
+        padding: 12px 16px; background: var(--navy); color: #fff;
+      }
+      .instrucoes p { flex: 1 1 320px; font-size: 14px; }
+      .instrucoes button {
+        min-height: 44px; padding: 0 20px; border: 0; border-radius: 6px;
+        background: #fff; color: var(--navy); font: inherit; font-weight: 700; cursor: pointer;
+      }
+      .instrucoes button:hover { background: var(--ceu); }
+      .instrucoes :focus-visible { outline-color: #fff; }
+
+      /* Folha A4 */
+      .folha {
+        width: 210mm; max-width: calc(100% - 32px); min-height: 297mm;
+        margin: 24px auto; padding: 20mm 18mm;
+        background: #fff; box-shadow: 0 8px 24px rgba(15, 42, 61, .15);
+        display: flex; flex-direction: column; gap: 14px;
+      }
+      .folha h2 { font-size: 24px; padding-bottom: 8px; border-bottom: 3px solid var(--teal); }
+      .folha h3 { font-size: 18px; margin-top: 10px; }
+      .folha h4 { font-size: 15px; margin: 6px 0 0; }
+      .folha ul, .folha ol { padding-left: 1.3em; display: flex; flex-direction: column; gap: 2px; }
+
+      /* Capa */
+      .capa { justify-content: space-between; }
+      .capa__topo { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 18px; }
+      .capa__topo img { width: 48px; height: 48px; }
+      .capa__titulo { display: flex; flex-direction: column; gap: 12px; }
+      .capa__titulo h1 { font-size: 48px; }
+      .capa__titulo p { font-size: 20px; color: var(--texto-2); }
+      .capa__faixa { height: 10px; border-radius: 999px; background: linear-gradient(90deg, var(--teal) 0 60%, var(--roxo) 60% 100%); }
+
+      table { width: 100%; border-collapse: collapse; font-size: 14px; }
+      th, td { text-align: left; vertical-align: top; padding: 6px 8px; border-bottom: 1px solid var(--borda); }
+      th { background: var(--superficie); }
+
+      .campo-capa {
+        width: 100%; min-height: 36px; padding: 4px 6px;
+        border: 0; border-bottom: 2px solid var(--texto-2); background: transparent;
+        font: inherit; color: var(--navy);
+      }
+      .campo-capa:hover { border-bottom-color: var(--navy); }
+      .campo-capa:focus-visible { outline: 3px solid var(--teal); outline-offset: 0; border-bottom-color: var(--teal); }
+
+      .links { display: grid; gap: 10px; }
+      .link { display: grid; gap: 2px; }
+      .link strong { font-size: 14px; }
+      .link a { word-break: break-all; }
+      .link input { font-size: 14px; }
+
+      .nota { padding: 10px 12px; border-left: 5px solid var(--teal); background: var(--ceu); border-radius: 6px; font-size: 14px; }
+      .placeholder-sprint1 {
+        display: flex; align-items: center; justify-content: center; min-height: 120px; padding: 16px;
+        border: 2px dashed var(--texto-2); border-radius: 10px; color: var(--texto-2); text-align: center;
+      }
+      .mermaid { display: flex; justify-content: center; }
+      .mermaid svg { max-width: 100%; height: auto; }
+
+      @page { size: A4; margin: 16mm 18mm; }
+      @media print {
+        body { background: #fff; }
+        .instrucoes, .so-tela { display: none !important; }
+        .folha { width: auto; max-width: none; min-height: 0; margin: 0; padding: 0; box-shadow: none; break-after: page; }
+        .folha:last-of-type { break-after: auto; }
+        .capa { height: 262mm; }
+        .campo-capa { border-bottom-color: var(--borda); }
+        tr:has(.campo-capa:placeholder-shown) { display: none; } /* linhas vazias não saem no PDF */
+        tr, .mermaid, .nota, .placeholder-sprint1 { break-inside: avoid; }
+        h2, h3, h4 { break-after: avoid; }
+        .mermaid svg { width: 100% !important; max-width: none !important; }
+        a { color: var(--navy); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="instrucoes">
+      <p>Preencha os nomes, os RMs e os links de deploy e vídeo. Depois clique em <strong>Salvar como PDF</strong> e escolha “Salvar como PDF” no destino, com margens “Nenhuma” e “Gráficos de fundo” ligado. O que você digita fica salvo neste navegador.</p>
+      <button type="button" onclick="window.print()">Salvar como PDF</button>
+    </div>
+
+    <main>
+      <!-- CAPA -->
+      <section class="folha capa" aria-labelledby="titulo-capa">
+        <div class="capa__topo">
+          <img src="../img/logo.svg" alt="" width="48" height="48">
+          Digital Nomads
+        </div>
+
+        <div class="capa__titulo">
+          <span style="font-weight: 700; color: var(--teal)">Challenge · Front-End Design · Sprint 2</span>
+          <h1 id="titulo-capa">Cidade Resiliente</h1>
+          <p>Protótipo de alta fidelidade em código: três fluxos navegáveis e componentes com estados.</p>
+          <div class="capa__faixa"></div>
+        </div>
+
+        <div>
+          <h2 style="font-size: 20px">Integrantes</h2>
+          <table>
+            <thead>
+              <tr><th scope="col" style="width: 70%">Nome completo</th><th scope="col">RM</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><input class="campo-capa" data-salvar="nome-1" aria-label="Nome completo do integrante 1" placeholder="Nome completo"></td><td><input class="campo-capa" data-salvar="rm-1" aria-label="RM do integrante 1" placeholder="RM"></td></tr>
+              <tr><td><input class="campo-capa" data-salvar="nome-2" aria-label="Nome completo do integrante 2" placeholder="Nome completo"></td><td><input class="campo-capa" data-salvar="rm-2" aria-label="RM do integrante 2" placeholder="RM"></td></tr>
+              <tr><td><input class="campo-capa" data-salvar="nome-3" aria-label="Nome completo do integrante 3" placeholder="Nome completo"></td><td><input class="campo-capa" data-salvar="rm-3" aria-label="RM do integrante 3" placeholder="RM"></td></tr>
+              <tr><td><input class="campo-capa" data-salvar="nome-4" aria-label="Nome completo do integrante 4" placeholder="Nome completo"></td><td><input class="campo-capa" data-salvar="rm-4" aria-label="RM do integrante 4" placeholder="RM"></td></tr>
+              <tr><td><input class="campo-capa" data-salvar="nome-5" aria-label="Nome completo do integrante 5" placeholder="Nome completo"></td><td><input class="campo-capa" data-salvar="rm-5" aria-label="RM do integrante 5" placeholder="RM"></td></tr>
+              <tr><td><input class="campo-capa" data-salvar="nome-6" aria-label="Nome completo do integrante 6" placeholder="Nome completo"></td><td><input class="campo-capa" data-salvar="rm-6" aria-label="RM do integrante 6" placeholder="RM"></td></tr>
+            </tbody>
+          </table>
+          <p class="so-tela" style="font-size: 13px; color: var(--texto-2); margin-top: 6px">Linhas em branco não aparecem no PDF.</p>
+        </div>
+
+        <p style="color: var(--texto-2)">Juiz de Fora/MG · 2026</p>
+      </section>
+
+      <!-- LINKS -->
+      <section class="folha" aria-labelledby="titulo-links">
+        <h2 id="titulo-links">1. Links da entrega</h2>
+        <div class="links">
+          <div class="link">
+            <strong>Protótipo publicado</strong>
+            <input class="campo-capa so-tela" data-salvar="link-deploy" data-link="link-deploy" aria-label="Link do protótipo publicado" value="https://deboracgs.github.io/challenge-digital-nomads-2026/">
+            <a id="link-deploy" href="https://deboracgs.github.io/challenge-digital-nomads-2026/">https://deboracgs.github.io/challenge-digital-nomads-2026/</a>
+          </div>
+          <div class="link">
+            <strong>Repositório do código-fonte (com README de execução)</strong>
+            <a href="https://github.com/Deboracgs/challenge-digital-nomads-2026">https://github.com/Deboracgs/challenge-digital-nomads-2026</a>
+          </div>
+          <div class="link">
+            <strong>Design system e materiais da Sprint 1</strong>
+            <a href="https://claude.ai/artifact/G4qN849nvuuydiSgA1apmD">https://claude.ai/artifact/G4qN849nvuuydiSgA1apmD</a>
+          </div>
+          <div class="link">
+            <strong>Vídeo demonstrativo (até 3 min · três fluxos + navegação só por teclado)</strong>
+            <input class="campo-capa so-tela" data-salvar="link-video" data-link="link-video" aria-label="Link do vídeo demonstrativo" placeholder="Cole aqui o link do YouTube (não listado) ou Google Drive">
+            <a id="link-video" href="#">(adicionar link do vídeo)</a>
+          </div>
+          <div class="link">
+            <strong>Componentes com estados (dentro do protótipo)</strong>
+            <span>componentes.html · o mesmo endereço do protótipo publicado + <code>componentes.html</code></span>
+          </div>
+        </div>
+
+        <div class="nota">Todos os links foram abertos em janela anônima antes do envio. O repositório é público e o vídeo está com acesso aberto para quem tem o link.</div>
+
+        <h3>Como executar o projeto</h3>
+        <p>O protótipo é HTML, CSS e JavaScript puro, sem dependências e sem etapa de build. Basta abrir <code>index.html</code> no navegador, ou rodar <code>python3 -m http.server 8000</code> na pasta e acessar <code>http://localhost:8000</code>. O passo a passo completo e as instruções de deploy estão no README do repositório.</p>
+
+        <h3>Mapa da entrega por critério</h3>
+        <table>
+          <thead><tr><th scope="col">Critério</th><th scope="col">Onde está</th></tr></thead>
+          <tbody>
+            <tr><td>1 · Fluxos e arquitetura (20 pts)</td><td>Seções 2, 3 e 4 deste PDF · <code>docs/fluxos.md</code> no repositório</td></tr>
+            <tr><td>2 · Protótipo em código (40 pts)</td><td>Link do protótipo publicado · repositório · seção 5</td></tr>
+            <tr><td>3 · Componentes com estados (40 pts)</td><td><code>componentes.html</code> · seção 5 · <code>css/style.css</code></td></tr>
+            <tr><td>Material da Sprint 1 (obrigatório)</td><td>Seção 6 · link do design system</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- FLUXOS -->
+      <section class="folha" aria-labelledby="titulo-fluxos">
+        <h2 id="titulo-fluxos">2. Os três fluxos principais</h2>
+
+        <h3>Fluxo 1 (principal) · Cadastro do morador</h3>
+        <p><strong>Perfil do usuário:</strong> Cláudia, moradora do Parque Burnier, área de encosta. Usa o celular para tudo, mas tem pouco tempo. Cuida do filho, Lucas, e do vizinho, Seu Joaquim.</p>
+        <p><strong>Tarefa:</strong> criar a conta para receber alertas da Defesa Civil e entrar na rede de vigias do bairro.</p>
+        <p><strong>Telas:</strong> cadastro.html → avatar.html → index.html</p>
+        <h4>Caminho principal</h4>
+        <ol>
+          <li>No passo 1 de 2, preenche nome, celular com DDD e bairro, e escolhe pelo menos um canal de alerta (app, SMS ou ligação de voz).</li>
+          <li>Toca em Continuar e vai para a escolha de avatar (passo 2 de 2).</li>
+          <li>Escolhe o avatar e toca em Concluir cadastro.</li>
+          <li>Chega ao início, que a chama pelo nome e mostra o avatar no chip de perfil.</li>
+        </ol>
+        <h4>Caminhos alternativos</h4>
+        <ul>
+          <li>Voltar nos dois passos.</li>
+          <li>Rua ou referência é opcional.</li>
+          <li>Pode marcar vários canais.</li>
+          <li>WhatsApp aparece desabilitado (“Em breve”).</li>
+        </ul>
+        <h4>Pontos de falha</h4>
+        <table>
+          <thead><tr><th scope="col">Falha</th><th scope="col">Resposta da interface</th></tr></thead>
+          <tbody>
+            <tr><td>Campo obrigatório vazio</td><td>Mensagem com ícone e texto, borda de erro, <code>aria-invalid</code>, foco no primeiro campo com problema</td></tr>
+            <tr><td>Celular sem DDD</td><td>“Digite o celular com DDD. Exemplo: (32) 99999-0000.”</td></tr>
+            <tr><td>Nenhum canal escolhido</td><td>Erro no grupo: “Escolha pelo menos um jeito de receber os alertas.”</td></tr>
+            <tr><td>Nenhum avatar escolhido</td><td>“Escolha um avatar para continuar.”</td></tr>
+            <tr><td>A pessoa corrige</td><td>O erro some na hora, sem reenviar</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Fluxo 2 · Receber um alerta e chegar ao abrigo</h3>
+        <p><strong>Perfil do usuário:</strong> Cláudia, numa chuva forte à noite, com pressa e talvez sem internet. Alternativo: Seu Joaquim, idoso, com baixa visão e sem smartphone.</p>
+        <p><strong>Tarefa:</strong> entender o risco, saber o que fazer, chegar ao abrigo e avisar que está em segurança.</p>
+        <p><strong>Telas:</strong> alerta.html → rota (alerta.html#rota) → seguranca.html</p>
+        <h4>Caminho principal</h4>
+        <ol>
+          <li>O alerta chega. No protótipo, ele é simulado pelo link “Simular alerta” do rodapé.</li>
+          <li>O cartão de alerta mostra o nível (forma + cor + palavra), o que fazer agora e o abrigo mais próximo.</li>
+          <li>Ver rota até o abrigo abre o mapa da rota a pé.</li>
+          <li>Confirmar que estou em segurança abre a confirmação, com a rede de vizinhos avisada.</li>
+          <li>Voltar ao início.</li>
+        </ol>
+        <h4>Caminhos alternativos</h4>
+        <ul>
+          <li>Pedir socorro (topo de todas as telas do modo alerta) liga para o 199.</li>
+          <li>Modo letra grande para o Seu Joaquim: status grande, Ouvir aviso (leitura em voz alta) e Ligar para a Cláudia.</li>
+        </ul>
+        <h4>Pontos de falha</h4>
+        <table>
+          <thead><tr><th scope="col">Falha</th><th scope="col">Resposta da interface</th></tr></thead>
+          <tbody>
+            <tr><td>Sem internet</td><td>Rota salva no aparelho; SMS e ligação não dependem de dados móveis</td></tr>
+            <tr><td>Navegador não lê em voz alta</td><td>Botão Ouvir aviso em estado de erro, com o que fazer: pedir ajuda ou ligar 199</td></tr>
+            <tr><td>Pessoa não distingue cores</td><td>Nível sempre com forma (círculo, triângulo, losango, octógono) e palavra</td></tr>
+            <tr><td>Situação piora depois de confirmar</td><td>A confirmação lembra do botão Pedir socorro</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="folha" aria-labelledby="titulo-fluxo3">
+        <h3 id="titulo-fluxo3" style="margin-top: 0">Fluxo 3 · Missão: registrar os bueiros da rua</h3>
+        <p><strong>Perfil do usuário:</strong> Cláudia num dia sem chuva (modo bairro), com 10 minutos livres, junto com o Lucas.</p>
+        <p><strong>Tarefa:</strong> registrar os bueiros da rua para a Defesa Civil saber onde pode alagar.</p>
+        <p><strong>Telas:</strong> index.html → missao.html → perfil.html#ranking</p>
+        <h4>Caminho principal</h4>
+        <ol>
+          <li>No início, vê a trilha da semana e o cartão da missão: 2 de 5 bueiros registrados.</li>
+          <li>Continuar missão abre o formulário.</li>
+          <li>Para cada bueiro, informa onde fica e como está. Observação e foto são opcionais.</li>
+          <li>Registrar bueiro: o cartão entra na lista, a barra de progresso avança e um aviso confirma.</li>
+          <li>No quinto bueiro aparece “Missão concluída”, com o link Ver ranking do bairro.</li>
+        </ol>
+        <h4>Caminhos alternativos</h4>
+        <ul>
+          <li>Entrar pela aba Missões.</li>
+          <li>Recomeçar demonstração.</li>
+        </ul>
+        <h4>Pontos de falha</h4>
+        <table>
+          <thead><tr><th scope="col">Falha</th><th scope="col">Resposta da interface</th></tr></thead>
+          <tbody>
+            <tr><td>Local ou situação vazios</td><td>Mensagem de erro no campo e foco no primeiro problema</td></tr>
+            <tr><td>Local com menos de 3 letras</td><td>“Escreva pelo menos 3 letras para a gente achar o lugar.”</td></tr>
+            <tr><td>Sem internet ao registrar</td><td>Cartão do bueiro em estado de erro, com Tentar de novo. O progresso só avança quando o envio funciona</td></tr>
+            <tr><td>Tentar de novo ainda sem internet</td><td>“Ainda sem internet. Tente de novo daqui a pouco.”</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Tela complementar · Painel da Defesa Civil (persona Renata)</h3>
+        <p>Não é um dos três fluxos avaliados, mas está navegável. Renata filtra os bairros por nível de risco, aciona os vigias (o botão fica desabilitado e continua no Tab) e valida ou descarta relatos de moradores.</p>
+      </section>
+
+      <!-- COMPONENTES POR PÁGINA -->
+      <section class="folha" aria-labelledby="titulo-componentes">
+        <h2 id="titulo-componentes">3. Componentes por página</h2>
+        <p>Nomes do design system da Sprint 1.</p>
+        <table style="font-size: 13px">
+          <thead><tr><th scope="col" style="width: 24%">Página</th><th scope="col">Componentes</th></tr></thead>
+          <tbody>
+            <tr><td><strong>cadastro.html</strong><br>Fluxo 1</td><td>Cabeçalho · Link “Pular para o conteúdo” · Botão secundário amigável · Barra de progresso · Campo de texto · Seleção · Grupo de opções + Cartão de opção (um desabilitado) · Mensagem de erro · Botão primário amigável grande · Rodapé</td></tr>
+            <tr><td><strong>avatar.html</strong><br>Fluxo 1</td><td>Cabeçalho · Botão secundário amigável · Barra de progresso · Seletor de avatar (componente composto) · Mensagem de erro · Botão primário amigável grande · Rodapé</td></tr>
+            <tr><td><strong>index.html</strong><br>Fluxos 1 e 3</td><td>Cabeçalho · Menu principal · Chip de perfil · Faixa de risco + Nível de risco · Saudação com o Teto · Trilha da semana · Cartão de missão · Pílula de pontos · Barra de progresso · Botões primário e secundário · Cartão de conquista · Lista de pessoas · Botão desabilitado · Ranking · Rodapé · Barra de navegação inferior</td></tr>
+            <tr><td><strong>missao.html</strong><br>Fluxo 3</td><td>Cabeçalho · Menu principal · Chip de perfil · Pílula de pontos · Barra de progresso · Aviso (status) · Cartão com formulário · Campo de texto · Seleção · Área de texto · Campo de arquivo · Botão primário amigável grande · Cartão (com estado de erro) · Cartão de conquista · Rodapé · Barra de navegação inferior</td></tr>
+            <tr><td><strong>alerta.html</strong><br>Fluxo 2</td><td>Cabeçalho · Botão de socorro · Faixa de alerta · Cartão de alerta · Nível de risco grande · Caixa de abrigo · Botões grandes em bloco · Mapa da rota · Legenda · Rodapé</td></tr>
+            <tr><td><strong>seguranca.html</strong><br>Fluxo 2</td><td>Cabeçalho · Botão de socorro · Faixa de alerta · Cartão de confirmação · Lista de pessoas · Botões grandes em bloco · Rodapé</td></tr>
+            <tr><td><strong>letra-grande.html</strong><br>Fluxo 2 alternativo</td><td>Cabeçalho · Saudação com avatar · Status grande · Botão primário com ícone (com estado de erro) · Botão secundário com ícone · Caixa de abrigo · Botão de socorro · Rodapé</td></tr>
+            <tr><td><strong>mapa.html</strong></td><td>Cabeçalho · Menu principal · Faixa de risco · Mapa da rota · Legenda · Cartão interativo · Cartão desabilitado · Rodapé · Barra de navegação inferior</td></tr>
+            <tr><td><strong>perfil.html</strong></td><td>Cabeçalho · Menu principal · Cartão · Avatar · Pílula de conquista · Barra de progresso · Números · Conquistas (uma bloqueada) · Placa Bairro Preparado · Ranking · Dica do Teto · Rodapé · Barra de navegação inferior</td></tr>
+            <tr><td><strong>painel.html</strong></td><td>Cabeçalho do painel · Etiqueta “Dados fictícios” · Filtros · Indicadores · Bloco · Mapa de calor · Legenda · Lista de ações · Botões (com desabilitado) · Ocupação dos abrigos · Relatos · Entrega por canal · Rodapé</td></tr>
+            <tr><td><strong>componentes.html</strong></td><td>Documentação dos estados de Botão, Campo de texto, Seleção, Cartão, Cartão de opção, Seletor de avatar e Nível de risco</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- FLUXOGRAMA -->
+      <section class="folha" aria-labelledby="titulo-fluxograma">
+        <h2 id="titulo-fluxograma">4. Fluxograma de navegação</h2>
+        <pre class="mermaid" aria-label="Fluxograma de navegação entre as páginas do protótipo">
+flowchart TD
+    classDef f1 fill:#e6f2f6,stroke:#1f6f8b,color:#0f2a3d
+    classDef f2 fill:#fdf0e6,stroke:#e07b30,color:#0f2a3d
+    classDef f3 fill:#ede7f6,stroke:#5b3f8c,color:#0f2a3d
+    classDef extra fill:#eef3f6,stroke:#5a6b77,color:#0f2a3d
+
+    subgraph F1["Fluxo 1 · Cadastro (principal)"]
+        CAD["cadastro.html<br/>Passo 1: dados e canais"]
+        AVA["avatar.html<br/>Passo 2: avatar"]
+        CAD -- "Continuar (válido)" --> AVA
+        CAD -- "Erro de validação" --> CAD
+        AVA -- "Erro: sem avatar" --> AVA
+        AVA -- "Voltar" --> CAD
+    end
+
+    INI["index.html<br/>Início · modo bairro"]
+    AVA -- "Concluir cadastro" --> INI
+
+    subgraph F3["Fluxo 3 · Missão"]
+        MIS["missao.html<br/>Registrar bueiros"]
+        MIS -- "Registrar (válido)" --> MIS
+        MIS -- "Sem internet → cartão em erro → Tentar de novo" --> MIS
+        PER["perfil.html#ranking<br/>Ranking do bairro"]
+        MIS -- "5 de 5: Ver ranking" --> PER
+    end
+    INI -- "Continuar missão" --> MIS
+
+    subgraph F2["Fluxo 2 · Alerta"]
+        ALE["alerta.html<br/>Cartão de alerta"]
+        ROT["alerta.html#rota<br/>Rota até o abrigo"]
+        SEG["seguranca.html<br/>Confirmação"]
+        LG["letra-grande.html<br/>Seu Joaquim"]
+        TEL(["Ligar 199"])
+        ALE -- "Ver rota" --> ROT
+        ALE -- "Confirmar segurança" --> SEG
+        ALE -- "Pedir socorro" --> TEL
+        SEG -- "Ver a rota de novo" --> ROT
+        LG -- "Pedir socorro" --> TEL
+    end
+    INI -. "alerta da Defesa Civil<br/>(no protótipo: Simular alerta)" .-> ALE
+    SEG -- "Voltar ao início" --> INI
+    INI -- "Letra grande" --> LG
+
+    MAP["mapa.html<br/>Mapa e abrigos"]
+    PAI["painel.html<br/>Defesa Civil · Renata"]
+    INI -- "Mapa / Ver rota do abrigo" --> MAP
+    INI -- "Perfil / Ranking" --> PER
+    MAP -- "Cartão do abrigo" --> ALE
+    PAI -- "Ver alerta enviado" --> ALE
+
+    class CAD,AVA f1
+    class ALE,ROT,SEG,LG,TEL f2
+    class MIS,PER f3
+    class INI,MAP,PAI extra
+        </pre>
+        <p style="font-size: 14px; color: var(--texto-2)">Em todas as telas do modo bairro, a barra de navegação inferior (celular) e o menu principal (desktop) ligam Início, Mapa, Missões, Ranking e Perfil. O rodapé leva a Cadastro, Simular alerta, Painel e Componentes.</p>
+      </section>
+
+      <!-- PROTÓTIPO E ESTADOS -->
+      <section class="folha" aria-labelledby="titulo-codigo">
+        <h2 id="titulo-codigo">5. Protótipo em código e componentes com estados</h2>
+
+        <h3>HTML semântico, acessibilidade e responsividade</h3>
+        <ul>
+          <li>Landmarks em todas as páginas: <code>header</code>, <code>nav</code> (com <code>aria-label</code>), <code>main</code> e <code>footer</code>.</li>
+          <li>Um <code>h1</code> por página, com os headings em ordem e sem pular níveis.</li>
+          <li>O primeiro Tab de cada página mostra o link “Pular para o conteúdo”.</li>
+          <li>Foco visível em tudo: contorno de 3 px em teal (branco no cabeçalho escuro). Nenhum <code>outline</code> é removido sem substituto.</li>
+          <li>Erros sempre com ícone + texto, <code>aria-invalid</code> e <code>aria-describedby</code>. Resultados das ações anunciados com <code>role="status"</code>, e o cartão de alerta usa <code>role="alert"</code>.</li>
+          <li>Mobile first: o viewport prioritário é o celular (390 px), sem rolagem horizontal em nenhuma página. No desktop (900 px ou mais) o layout passa a duas colunas com menu no topo.</li>
+          <li>Todo alvo de toque tem pelo menos 48 px.</li>
+        </ul>
+
+        <h3>Componentes do fluxo principal com os seis estados</h3>
+        <table>
+          <thead>
+            <tr><th scope="col">Componente</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Active</th><th scope="col">Disabled</th><th scope="col">Erro</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Botão</strong></td><td>Fundo navy / superfície</td><td>Contorno 3 px</td><td>Desce 2 px, sombra menor</td><td><code>aria-disabled</code>, cinza, continua no Tab</td><td>Borda e texto de erro + mensagem</td></tr>
+            <tr><td><strong>Campo de texto</strong></td><td>Borda navy</td><td>Borda e contorno teal</td><td>Fundo céu</td><td>Tracejado, fundo superfície</td><td>Borda de erro, <code>aria-invalid</code>, mensagem</td></tr>
+            <tr><td><strong>Seleção</strong></td><td>Borda navy</td><td>Borda e contorno teal</td><td>Fundo céu</td><td>Tracejado, fundo superfície</td><td>Borda de erro, <code>aria-invalid</code>, mensagem</td></tr>
+            <tr><td><strong>Cartão / Cartão de opção</strong></td><td>Borda teal / navy</td><td>Contorno no cartão inteiro</td><td>Escala 0,99; marcado em teal</td><td>Tracejado, cinza</td><td>Borda e fundo de erro</td></tr>
+            <tr><td><strong>Seletor de avatar</strong> (composto)</td><td>Borda roxa</td><td>Contorno 3 px</td><td>Escala 0,97; selecionado em roxo</td><td>Tracejado, avatar em cinza</td><td>Borda de erro no grupo + mensagem</td></tr>
+          </tbody>
+        </table>
+        <p>Todos os estados podem ser vistos juntos em <strong>componentes.html</strong>. As versões de hover, focus e active aparecem “congeladas” para leitura, e os exemplos default respondem ao mouse, ao Tab e ao clique.</p>
+      </section>
+
+      <!-- SPRINT 1 -->
+      <section class="folha" aria-labelledby="titulo-sprint1">
+        <h2 id="titulo-sprint1">6. Material da Sprint 1 (versão atualizada)</h2>
+        <p>Mood board, escolhas de design e componentes base, atualizados com os refinamentos feitos durante a implementação.</p>
+        <p><strong>Link:</strong> <a href="https://claude.ai/artifact/G4qN849nvuuydiSgA1apmD">https://claude.ai/artifact/G4qN849nvuuydiSgA1apmD</a></p>
+
+        <h3>Refinamentos feitos na Sprint 2</h3>
+        <ul>
+          <li>Novo token <code>--cor-erro</code> (#b42318, 6,40:1 no branco) para erros de formulário, separado das cores de risco, que continuam só para risco.</li>
+          <li>Estados hover, focus, active, disabled e erro definidos para todos os componentes interativos.</li>
+          <li>Novos componentes: Campo de texto, Seleção, Cartão de opção, Cartão interativo, Mensagem de erro, Aviso de status e Rodapé.</li>
+          <li>Ícones passaram de SVG embutido no HTML para arquivos de imagem em <code>img/icones/</code>.</li>
+        </ul>
+
+        <h3>Mood board</h3>
+        <div class="placeholder-sprint1">Inserir aqui o mood board da Sprint 1</div>
+        <h3>Escolhas de design</h3>
+        <div class="placeholder-sprint1">Inserir aqui as escolhas de design (cores, tipografia, formas dos níveis de risco)</div>
+        <h3>Componentes base</h3>
+        <div class="placeholder-sprint1">Inserir aqui os componentes base da Sprint 1</div>
+      </section>
+    </main>
+
+    <script>
+      /* Guarda o que foi digitado neste navegador e atualiza os links impressos */
+      document.querySelectorAll('[data-salvar]').forEach(function (campo) {
+        var chave = 'entrega-sprint2:' + campo.dataset.salvar;
+        try {
+          var salvo = localStorage.getItem(chave);
+          if (salvo !== null) campo.value = salvo;
+        } catch (e) { /* sem armazenamento */ }
+
+        function atualizar() {
+          try { localStorage.setItem(chave, campo.value); } catch (e) { /* segue */ }
+          if (!campo.dataset.link) return;
+          var link = document.getElementById(campo.dataset.link);
+          var valor = campo.value.trim();
+          link.href = valor || '#';
+          link.textContent = valor || '(adicionar link)';
+        }
+        campo.addEventListener('input', atualizar);
+        atualizar();
+      });
+
+      if (window.mermaid) {
+        mermaid.initialize({ startOnLoad: true, theme: 'base', fontFamily: 'Atkinson Hyperlegible, Arial, sans-serif', flowchart: { htmlLabels: true } });
+      }
+    </script>
+  </body>
+</html>

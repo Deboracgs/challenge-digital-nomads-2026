@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Escolha seu avatar · Cidade Resiliente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+    <div class="app">
+      <header class="cabecalho">
+        <div class="container cabecalho__inner">
+          <a class="marca" href="index.html">
+            <img src="img/logo.svg" alt="" width="40" height="40">
+            Cidade Resiliente
+          </a>
+        </div>
+      </header>
+
+      <main id="conteudo" class="container conteudo coluna">
+        <div class="passos-cadastro">
+          <a href="cadastro.html" class="btn btn--secundario btn--amigavel" style="padding: 0 var(--espaco-4)">Voltar</a>
+          <div class="progresso">
+            <div class="progresso__barra" role="progressbar" aria-valuemin="0" aria-valuemax="2" aria-valuenow="2" aria-label="Passo 2 de 2 do cadastro"><span style="width: 100%"></span></div>
+            <span class="texto-apoio">Passo 2 de 2</span>
+          </div>
+        </div>
+
+        <form class="coluna" action="index.html" data-validar="avatar">
+          <fieldset class="avatares" aria-describedby="erro-avatar" data-erro="erro-avatar" data-erro-vazio="Escolha um avatar para continuar.">
+            <legend><h1>Escolha quem vai representar você no bairro</h1></legend>
+            <p class="mensagem-erro" id="erro-avatar" hidden>
+              <img src="img/icones/erro.svg" alt="" width="18" height="18">
+              <span></span>
+            </p>
+            <div class="avatares__grade">
+              <label class="avatar-opcao">
+                <input type="radio" name="avatar" value="claudia">
+                <img src="img/avatares/claudia.svg" alt="" width="140" height="140">
+                <strong>Cláudia</strong>
+                <span>Capa de chuva</span>
+              </label>
+              <label class="avatar-opcao">
+                <input type="radio" name="avatar" value="lucas">
+                <img src="img/avatares/lucas.svg" alt="" width="140" height="140">
+                <strong>Lucas</strong>
+                <span>Lanterna</span>
+              </label>
+              <label class="avatar-opcao">
+                <input type="radio" name="avatar" value="joaquim">
+                <img src="img/avatares/joaquim.svg" alt="" width="140" height="140">
+                <strong>Seu Joaquim</strong>
+                <span>Rádio</span>
+              </label>
+              <label class="avatar-opcao">
+                <input type="radio" name="avatar" value="ana">
+                <img src="img/avatares/ana.svg" alt="" width="140" height="140">
+                <strong>Ana</strong>
+                <span>Apito</span>
+              </label>
+              <label class="avatar-opcao">
+                <input type="radio" name="avatar" value="bia">
+                <img src="img/avatares/bia.svg" alt="" width="140" height="140">
+                <strong>Bia</strong>
+                <span>Kit de primeiros socorros</span>
+              </label>
+              <label class="avatar-opcao">
+                <input type="radio" name="avatar" value="teo">
+                <img src="img/avatares/teo.svg" alt="" width="140" height="140">
+                <strong>Téo</strong>
+                <span>Celular carregado</span>
+              </label>
+            </div>
+          </fieldset>
+          <p class="texto-apoio">Cada avatar carrega um item do kit de emergência. Você pode trocar depois.</p>
+          <button class="btn btn--primario btn--amigavel btn--grande btn--bloco" type="submit">Concluir cadastro</button>
+        </form>
+      </main>
+
+      <footer class="rodape">
+        <div class="container rodape__inner">
+          <span>Protótipo · Digital Nomads · dados fictícios</span>
+          <nav aria-label="Telas do protótipo">
+            <a href="cadastro.html">Cadastro</a>
+            <a href="alerta.html">Simular alerta</a>
+            <a href="painel.html">Painel da Defesa Civil</a>
+            <a href="componentes.html">Componentes</a>
+          </nav>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

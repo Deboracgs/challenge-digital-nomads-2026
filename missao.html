@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Missão · Cidade Resiliente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+    <div class="app app--com-tabbar">
+      <header class="cabecalho">
+        <div class="container cabecalho__inner">
+          <a class="marca" href="index.html">
+            <img src="img/logo.svg" alt="" width="40" height="40">
+            Cidade Resiliente
+          </a>
+          <nav class="nav-principal" aria-label="Principal">
+            <a href="index.html">Meu bairro</a>
+            <a href="mapa.html">Mapa de risco</a>
+            <a href="missao.html" aria-current="page">Missões</a>
+            <a href="perfil.html#ranking">Ranking</a>
+            <a href="letra-grande.html">Letra grande</a>
+          </nav>
+          <a class="chip-perfil" href="perfil.html" aria-label="Meu perfil, nível 3">
+            <img src="img/avatares/claudia-rosto.svg" alt="" width="36" height="36" data-usuario="rosto">
+            Nível 3
+          </a>
+        </div>
+      </header>
+
+      <main id="conteudo" class="container conteudo colunas">
+        <div class="coluna coluna--principal">
+          <div class="coluna" style="gap: var(--espaco-3)">
+            <div class="grupo-botoes" style="align-items: center">
+              <span class="sobretitulo">Missão 3 de 5</span>
+              <span class="pilula pilula--pontos">+40 pontos</span>
+            </div>
+            <h1 style="font-size: var(--texto-titulo-alerta)">Registrar os bueiros da sua rua</h1>
+            <p>Bueiro entupido faz a rua alagar quando chove. Para cada um, diga onde fica e como ele está.</p>
+            <div class="progresso" data-progresso="bueiros">
+              <div class="progresso__barra" role="progressbar" aria-valuemin="0" aria-valuemax="5" aria-valuenow="2" aria-label="Bueiros registrados"><span style="width: 40%"></span></div>
+              <span class="texto-apoio" data-progresso-texto>2 de 5 bueiros registrados</span>
+            </div>
+          </div>
+
+          <div class="aviso" id="status-missao" role="status"></div>
+
+          <form class="formulario cartao" id="form-bueiro" action="missao.html" data-validar="missao" aria-labelledby="titulo-form">
+            <h2 id="titulo-form">Novo bueiro</h2>
+
+            <div class="campo">
+              <label class="campo__rotulo" for="local">Onde fica o bueiro?</label>
+              <span class="campo__dica" id="dica-local">Rua e número mais próximo, ou um ponto de referência.</span>
+              <input class="campo__entrada" id="local" name="local" type="text" required minlength="3" placeholder="Ex.: Rua das Flores, em frente ao 120" aria-describedby="dica-local erro-local" data-erro="erro-local" data-erro-vazio="Diga onde fica o bueiro." data-erro-curto="Escreva pelo menos 3 letras para a gente achar o lugar.">
+              <p class="mensagem-erro" id="erro-local" hidden>
+                <img src="img/icones/erro.svg" alt="" width="18" height="18">
+                <span></span>
+              </p>
+            </div>
+
+            <div class="campo">
+              <label class="campo__rotulo" for="situacao">Como ele está?</label>
+              <select class="campo__entrada" id="situacao" name="situacao" required aria-describedby="erro-situacao" data-erro="erro-situacao" data-erro-vazio="Escolha como o bueiro está.">
+                <option value="">Escolha uma opção</option>
+                <option value="limpo">Limpo, a água passa</option>
+                <option value="parcial">Parcialmente entupido</option>
+                <option value="entupido">Entupido</option>
+                <option value="quebrado">Tampa quebrada ou aberta</option>
+              </select>
+              <p class="mensagem-erro" id="erro-situacao" hidden>
+                <img src="img/icones/erro.svg" alt="" width="18" height="18">
+                <span></span>
+              </p>
+            </div>
+
+            <div class="campo">
+              <label class="campo__rotulo" for="observacao">Observação <span class="campo__opcional">(opcional)</span></label>
+              <textarea class="campo__entrada" id="observacao" name="observacao" rows="3"></textarea>
+            </div>
+
+            <div class="campo">
+              <label class="campo__rotulo" for="foto">Foto do bueiro <span class="campo__opcional">(opcional)</span></label>
+              <input class="campo__entrada" id="foto" name="foto" type="file" accept="image/*" style="padding: var(--espaco-2)">
+            </div>
+
+            <button class="btn btn--primario btn--amigavel btn--grande btn--bloco" type="submit">Registrar bueiro</button>
+          </form>
+
+          <section class="cartao cartao--conquista" id="missao-concluida" aria-labelledby="titulo-concluida" hidden>
+            <span class="sobretitulo">Missão 3 de 5 concluída</span>
+            <h2 id="titulo-concluida" tabindex="-1">Todos os bueiros da sua rua estão no mapa!</h2>
+            <p>A Defesa Civil já recebeu os registros. Seu bairro ganhou 40 pontos no ranking.</p>
+            <div class="grupo-botoes">
+              <a class="btn btn--primario btn--amigavel" href="perfil.html#ranking">Ver ranking do bairro</a>
+              <button class="btn btn--secundario btn--amigavel" type="button" id="reiniciar-missao">Recomeçar demonstração</button>
+            </div>
+          </section>
+        </div>
+
+        <aside class="coluna coluna--lateral" aria-labelledby="titulo-registrados">
+          <h2 id="titulo-registrados" style="font-size: var(--texto-subtitulo)">Bueiros registrados</h2>
+          <ul class="lista-registros lista-limpa" id="lista-bueiros">
+            <li class="cartao">
+              <h3>Rua Ibitiguaia, perto do 45</h3>
+              <p class="texto-apoio">Entupido · ontem</p>
+            </li>
+            <li class="cartao">
+              <h3>Esquina com a praça</h3>
+              <p class="texto-apoio">Limpo, a água passa · ontem</p>
+            </li>
+          </ul>
+          <span class="texto-apoio">Sem internet? O registro fica salvo no celular e você envia depois.</span>
+        </aside>
+      </main>
+
+      <footer class="rodape">
+        <div class="container rodape__inner">
+          <span>Protótipo · Digital Nomads · dados fictícios</span>
+          <nav aria-label="Telas do protótipo">
+            <a href="cadastro.html">Cadastro</a>
+            <a href="alerta.html">Simular alerta</a>
+            <a href="painel.html">Painel da Defesa Civil</a>
+            <a href="componentes.html">Componentes</a>
+          </nav>
+        </div>
+      </footer>
+
+      <nav class="tabbar" aria-label="Navegação principal">
+        <a href="index.html">
+          <img src="img/icones/tab-inicio.svg" alt="" width="24" height="24">
+          Início
+        </a>
+        <a href="mapa.html">
+          <img src="img/icones/tab-mapa.svg" alt="" width="24" height="24">
+          Mapa
+        </a>
+        <a href="missao.html" aria-current="page">
+          <img src="img/icones/tab-missoes-ativo.svg" alt="" width="24" height="24">
+          Missões
+        </a>
+        <a href="perfil.html#ranking">
+          <img src="img/icones/tab-ranking.svg" alt="" width="24" height="24">
+          Ranking
+        </a>
+        <a href="perfil.html">
+          <img src="img/icones/tab-perfil.svg" alt="" width="24" height="24">
+          Perfil
+        </a>
+      </nav>
+    </div>
+  </body>
+</html>

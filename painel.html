@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Painel da Defesa Civil · Cidade Resiliente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+    <div class="app pagina-painel">
+      <header class="painel-cabecalho">
+        <div class="container cabecalho__inner">
+          <a class="marca" href="painel.html">
+            <img src="img/logo-negativa.svg" alt="" width="40" height="40">
+            Painel da Defesa Civil
+          </a>
+          <span class="etiqueta-ficticio">Dados fictícios</span>
+          <span class="painel-plantao">Juiz de Fora · Renata · plantão · atualizado às 21h52</span>
+          <a class="btn" href="alerta.html">Ver alerta enviado</a>
+        </div>
+      </header>
+
+      <main id="conteudo" class="container conteudo coluna" style="gap: var(--espaco-4)">
+        <h1 class="sr-only">Painel da Defesa Civil · Juiz de Fora</h1>
+        <p class="sr-only" role="status" id="status-painel"></p>
+        <div class="filtros" role="group" aria-label="Filtrar por nível de risco">
+          <button class="filtro" type="button" aria-pressed="true" data-filtro="todos">Todos</button>
+          <button class="filtro" type="button" aria-pressed="false" data-filtro="emergencia">Emergência</button>
+          <button class="filtro" type="button" aria-pressed="false" data-filtro="alerta">Alerta</button>
+          <button class="filtro" type="button" aria-pressed="false" data-filtro="atencao">Atenção</button>
+          <button class="filtro" type="button" aria-pressed="false" data-filtro="normal">Normal</button>
+        </div>
+
+        <div class="indicadores">
+          <div class="indicador"><span>Regiões em alerta ou emergência</span><strong>3 de 7</strong></div>
+          <div class="indicador"><span>Pessoas alertadas</span><strong>18.420</strong></div>
+          <div class="indicador"><span>Confirmaram segurança</span><strong>3.115</strong></div>
+          <div class="indicador indicador--critico"><span>Sem confirmação em área de risco</span><strong>642</strong></div>
+          <div class="indicador"><span>Vigias acionados</span><strong>37</strong></div>
+        </div>
+
+        <div class="colunas colunas--painel" style="gap: var(--espaco-4)">
+          <section class="coluna coluna--principal bloco" aria-labelledby="titulo-mapa">
+            <div class="bloco__cabeca">
+              <h2 id="titulo-mapa" style="font-size: var(--texto-subtitulo)">Mapa de calor · Juiz de Fora</h2>
+              <span class="texto-apoio">Cor = nível de risco · tamanho = pessoas sem confirmação</span>
+            </div>
+            <div class="mapa">
+              <img class="mapa__img" src="img/mapas/juiz-de-fora.svg" alt="Mapa do município de Juiz de Fora com os bairros por nível de risco. Emergência: Parque Burnier e Vila Ideal, na Zona Sudeste. Alerta: Linhares e Grama. Atenção: Benfica e Santa Luzia. Normal: Centro e São Pedro." width="900" height="620">
+              <img class="mapa__rotulos" src="img/mapas/juiz-de-fora-rotulos.svg" alt="" width="900" height="620">
+            </div>
+            <div class="legenda">
+              <span>
+                <img src="img/icones/legenda-normal.svg" alt="" width="14" height="14">
+                Normal
+              </span>
+              <span>
+                <img src="img/icones/legenda-atencao.svg" alt="" width="14" height="14">
+                Atenção
+              </span>
+              <span>
+                <img src="img/icones/legenda-alerta.svg" alt="" width="14" height="14">
+                Alerta
+              </span>
+              <span>
+                <img src="img/icones/legenda-emergencia.svg" alt="" width="14" height="14">
+                Emergência
+              </span>
+              <span>Contorno oficial do município (IBGE) · posição dos bairros aproximada</span>
+            </div>
+          </section>
+
+          <div class="coluna coluna--lateral" style="gap: var(--espaco-4)">
+            <section class="bloco" aria-labelledby="titulo-acoes">
+              <h2 id="titulo-acoes">Onde agir primeiro</h2>
+              <span class="texto-apoio">Bairros com mais pessoas sem confirmar segurança</span>
+              <ol class="lista-acoes lista-limpa">
+                <li data-nivel="emergencia">
+                  <span><strong>Parque Burnier</strong><br><small>Sudeste · Emergência · 214 sem confirmação · 9 vigias</small></span>
+                  <button class="btn btn--primario" type="button" data-acionar="Parque Burnier">Acionar vigias</button>
+                </li>
+                <li data-nivel="emergencia">
+                  <span><strong>Vila Ideal</strong><br><small>Sudeste · Emergência · 131 sem confirmação · 6 vigias</small></span>
+                  <button class="btn btn--primario" type="button" data-acionar="Vila Ideal">Acionar vigias</button>
+                </li>
+                <li data-nivel="alerta">
+                  <span><strong>Linhares</strong><br><small>Leste · Alerta · 96 sem confirmação · 4 vigias</small></span>
+                  <button class="btn btn--secundario" type="button" data-acionar="Linhares">Acionar vigias</button>
+                </li>
+                <li data-nivel="alerta">
+                  <span><strong>Grama</strong><br><small>Nordeste · Alerta · 58 sem confirmação · 3 vigias</small></span>
+                  <button class="btn btn--secundario" type="button" data-acionar="Grama">Acionar vigias</button>
+                </li>
+              </ol>
+              <p class="texto-apoio" id="acoes-vazio" hidden>Nenhum bairro com esse nível precisa de ação agora.</p>
+            </section>
+
+            <section class="bloco" aria-labelledby="titulo-abrigos">
+              <h2 id="titulo-abrigos">Abrigos abertos</h2>
+              <div class="ocupacao">
+                <div class="ocupacao__linha"><strong>Abrigo 1 · Sudeste</strong><span>180 de 250</span></div>
+                <div class="progresso__barra" role="progressbar" aria-valuemin="0" aria-valuemax="250" aria-valuenow="180" aria-label="Lotação Abrigo 1 · Sudeste"><span style="width: 72%"></span></div>
+              </div>
+              <div class="ocupacao">
+                <div class="ocupacao__linha"><strong>Abrigo 2 · Leste</strong><span>95 de 200</span></div>
+                <div class="progresso__barra" role="progressbar" aria-valuemin="0" aria-valuemax="200" aria-valuenow="95" aria-label="Lotação Abrigo 2 · Leste"><span style="width: 48%"></span></div>
+              </div>
+              <div class="ocupacao">
+                <div class="ocupacao__linha"><strong>Abrigo 3 · Nordeste</strong><span>40 de 120</span></div>
+                <div class="progresso__barra" role="progressbar" aria-valuemin="0" aria-valuemax="120" aria-valuenow="40" aria-label="Lotação Abrigo 3 · Nordeste"><span style="width: 33%"></span></div>
+              </div>
+            </section>
+
+            <section class="bloco" aria-labelledby="titulo-relatos">
+              <h2 id="titulo-relatos" tabindex="-1">Relatos de moradores para validar</h2>
+              <div class="relato">
+                <span><strong>Rachadura na encosta</strong><br><small>Parque Burnier · com foto · há 12 min</small></span>
+                <button class="btn btn--primario" type="button" data-relato="validar">Validar</button>
+                <button class="btn btn--secundario" type="button" data-relato="descartar">Descartar</button>
+              </div>
+              <div class="relato">
+                <span><strong>Bueiro entupido</strong><br><small>Linhares · com foto · há 25 min</small></span>
+                <button class="btn btn--primario" type="button" data-relato="validar">Validar</button>
+                <button class="btn btn--secundario" type="button" data-relato="descartar">Descartar</button>
+              </div>
+              <div class="relato">
+                <span><strong>Árvore caída</strong><br><small>Grama · com foto · há 40 min</small></span>
+                <button class="btn btn--primario" type="button" data-relato="validar">Validar</button>
+                <button class="btn btn--secundario" type="button" data-relato="descartar">Descartar</button>
+              </div>
+              <p class="texto-apoio" id="relatos-vazio" hidden>Nenhum relato esperando validação.</p>
+            </section>
+          </div>
+        </div>
+
+        <section class="bloco" aria-labelledby="titulo-canais">
+          <h2 id="titulo-canais">Entrega do alerta por canal</h2>
+          <div class="canais">
+            <div class="ocupacao">
+              <div class="ocupacao__linha"><strong>Push no app</strong><span>12.300</span></div>
+              <div class="progresso__barra" style="height: 10px"><span style="width: 67%; background: var(--cor-teal);"></span></div>
+            </div>
+            <div class="ocupacao">
+              <div class="ocupacao__linha"><strong>SMS</strong><span>5.200</span></div>
+              <div class="progresso__barra" style="height: 10px"><span style="width: 28%; background: var(--cor-teal);"></span></div>
+            </div>
+            <div class="ocupacao">
+              <div class="ocupacao__linha"><strong>Ligação por voz</strong><span>920</span></div>
+              <div class="progresso__barra" style="height: 10px"><span style="width: 5%; background: var(--cor-teal);"></span></div>
+            </div>
+            <div class="ocupacao">
+              <div class="ocupacao__linha"><strong>Avisados por vigias</strong><span>148 vizinhos</span></div>
+              <div class="progresso__barra" style="height: 10px"><span style="width: 8%; background: var(--cor-teal); background: var(--cor-texto-2);"></span></div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="rodape">
+        <div class="container rodape__inner">
+          <span>Protótipo · Digital Nomads · dados fictícios</span>
+          <nav aria-label="Telas do protótipo">
+            <a href="cadastro.html">Cadastro</a>
+            <a href="alerta.html">Simular alerta</a>
+            <a href="index.html">App do morador</a>
+            <a href="componentes.html">Componentes</a>
+          </nav>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

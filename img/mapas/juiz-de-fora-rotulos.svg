@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" width="900" height="620" font-family="Atkinson Hyperlegible, Arial, sans-serif">
+  <path d="M441.5 240.0 L198.0 92.0" stroke="#0f2a3d" stroke-width="1.2" fill="none"/>
+  <rect x="14" y="70" width="184" height="44" rx="8" fill="#ffffff" stroke="#d3dde4" stroke-width="1"/>
+  <rect x="24" y="80" width="8" height="24" rx="4" fill="#f0b440"/>
+  <text x="40" y="89" font-size="14" font-weight="700" fill="#0f2a3d">Benfica</text>
+  <text x="40" y="106" font-size="12" fill="#0f2a3d">Norte · Atenção · 24</text>
+  <path d="M516.7 310.8 L198.0 252.0" stroke="#0f2a3d" stroke-width="1.2" fill="none"/>
+  <rect x="14" y="230" width="184" height="44" rx="8" fill="#ffffff" stroke="#d3dde4" stroke-width="1"/>
+  <rect x="24" y="240" width="8" height="24" rx="4" fill="#3a6341"/>
+  <text x="40" y="249" font-size="14" font-weight="700" fill="#0f2a3d">Centro</text>
+  <text x="40" y="266" font-size="12" fill="#0f2a3d">Centro · Normal</text>
+  <path d="M476.6 326.4 L198.0 412.0" stroke="#0f2a3d" stroke-width="1.2" fill="none"/>
+  <rect x="14" y="390" width="184" height="44" rx="8" fill="#ffffff" stroke="#d3dde4" stroke-width="1"/>
+  <rect x="24" y="400" width="8" height="24" rx="4" fill="#3a6341"/>
+  <text x="40" y="409" font-size="14" font-weight="700" fill="#0f2a3d">São Pedro</text>
+  <text x="40" y="426" font-size="12" fill="#0f2a3d">Oeste · Normal</text>
+  <path d="M504.7 353.4 L198.0 572.0" stroke="#0f2a3d" stroke-width="1.2" fill="none"/>
+  <rect x="14" y="550" width="184" height="44" rx="8" fill="#ffffff" stroke="#d3dde4" stroke-width="1"/>
+  <rect x="24" y="560" width="8" height="24" rx="4" fill="#f0b440"/>
+  <text x="40" y="569" font-size="14" font-weight="700" fill="#0f2a3d">Santa Luzia</text>
+  <text x="40" y="586" font-size="12" fill="#0f2a3d">Sul · Atenção · 31</text>
+  <path d="M554.8 269.2 L702.0 92.0" stroke="#0f2a3d" stroke-width="1.2" fill="none"/>
+  <rect x="702" y="70" width="184" height="44" rx="8" fill="#ffffff" stroke="#d3dde4" stroke-width="1"/>
+  <rect x="712" y="80" width="8" height="24" rx="4" fill="#e07b30"/>
+  <text x="728" y="89" font-size="14" font-weight="700" fill="#0f2a3d">Grama</text>
+  <text x="728" y="106" font-size="12" fill="#0f2a3d">Nordeste · Alerta · 58</text>
+  <path d="M548.8 308.1 L702.0 252.0" stroke="#0f2a3d" stroke-width="1.2" fill="none"/>
+  <rect x="702" y="230" width="184" height="44" rx="8" fill="#ffffff" stroke="#d3dde4" stroke-width="1"/>
+  <rect x="712" y="240" width="8" height="24" rx="4" fill="#e07b30"/>
+  <text x="728" y="249" font-size="14" font-weight="700" fill="#0f2a3d">Linhares</text>
+  <text x="728" y="266" font-size="12" fill="#0f2a3d">Leste · Alerta · 96</text>
+  <path d="M530.7 330.7 L702.0 412.0" stroke="#0f2a3d" stroke-width="1.2" fill="none"/>
+  <rect x="702" y="390" width="184" height="44" rx="8" fill="#ffffff" stroke="#0f2a3d" stroke-width="2"/>
+  <rect x="712" y="400" width="8" height="24" rx="4" fill="#c0392b"/>
+  <text x="728" y="409" font-size="14" font-weight="700" fill="#0f2a3d">Vila Ideal</text>
+  <text x="728" y="426" font-size="12" fill="#0f2a3d">Sudeste · Emergência · 131</text>
+  <path d="M544.8 344.8 L702.0 572.0" stroke="#0f2a3d" stroke-width="1.2" fill="none"/>
+  <rect x="702" y="550" width="184" height="44" rx="8" fill="#ffffff" stroke="#0f2a3d" stroke-width="2"/>
+  <rect x="712" y="560" width="8" height="24" rx="4" fill="#c0392b"/>
+  <text x="728" y="569" font-size="14" font-weight="700" fill="#0f2a3d">Parque Burnier</text>
+  <text x="728" y="586" font-size="12" fill="#0f2a3d">Sudeste · Emergência · 214</text>
+</svg>

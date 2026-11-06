@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Componentes e estados · Cidade Resiliente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+    <div class="app">
+      <header class="cabecalho">
+        <div class="container cabecalho__inner">
+          <a class="marca" href="index.html">
+            <img src="img/logo.svg" alt="" width="40" height="40">
+            Cidade Resiliente
+          </a>
+          <a class="btn btn--secundario" href="index.html" style="margin-left: auto">Voltar ao app</a>
+        </div>
+      </header>
+
+      <main id="conteudo" class="container conteudo coluna">
+        <div>
+          <h1 style="font-size: var(--texto-titulo-tela)">Componentes e estados</h1>
+          <p class="texto-apoio" style="font-size: var(--texto-corpo); margin-top: var(--espaco-1)">
+            Componentes do fluxo principal (cadastro) com os estados default, hover, focus, active, disabled e erro.
+            Os exemplos marcados como hover, focus e active estão “congelados” para leitura; os de default são reais:
+            passe o mouse, use Tab e clique para ver os estados ao vivo.
+          </p>
+        </div>
+
+        <nav aria-label="Componentes nesta página">
+          <ul class="grupo-botoes lista-limpa">
+            <li><a href="#botao">Botão</a></li>
+            <li><a href="#campo">Campo de texto</a></li>
+            <li><a href="#selecao">Seleção</a></li>
+            <li><a href="#cartao">Cartão</a></li>
+            <li><a href="#cartao-opcao">Cartão de opção</a></li>
+            <li><a href="#seletor-avatar">Seletor de avatar</a></li>
+            <li><a href="#nivel">Nível de risco</a></li>
+          </ul>
+        </nav>
+
+        <!-- BOTÃO -->
+        <section class="secao-componente" id="botao" aria-labelledby="titulo-botao">
+          <h2 id="titulo-botao">Botão</h2>
+          <p>Altura mínima de 48 px. Foco com contorno de 3 px em teal. Desabilitado usa <code>aria-disabled</code> para continuar no Tab. Erro indica uma ação que falhou e pode ser repetida.</p>
+
+          <h3>Primário</h3>
+          <div class="demo">
+            <div class="demo__item"><span class="demo__estado">Default</span><button class="btn btn--primario" type="button">Continuar</button></div>
+            <div class="demo__item"><span class="demo__estado">Hover</span><button class="btn btn--primario is-hover" type="button" tabindex="-1">Continuar</button></div>
+            <div class="demo__item"><span class="demo__estado">Focus</span><button class="btn btn--primario is-focus" type="button" tabindex="-1">Continuar</button></div>
+            <div class="demo__item"><span class="demo__estado">Active</span><button class="btn btn--primario is-active" type="button" tabindex="-1">Continuar</button></div>
+            <div class="demo__item"><span class="demo__estado">Disabled</span><button class="btn btn--primario" type="button" aria-disabled="true">Continuar</button></div>
+            <div class="demo__item">
+              <span class="demo__estado">Erro</span>
+              <button class="btn btn--primario" type="button" data-estado="erro" aria-describedby="demo-erro-botao">Tentar de novo</button>
+              <p class="mensagem-erro" id="demo-erro-botao">
+                <img src="img/icones/erro.svg" alt="" width="18" height="18">
+                <span>Não foi possível enviar.</span>
+              </p>
+            </div>
+          </div>
+
+          <h3>Secundário</h3>
+          <div class="demo">
+            <div class="demo__item"><span class="demo__estado">Default</span><button class="btn btn--secundario" type="button">Voltar</button></div>
+            <div class="demo__item"><span class="demo__estado">Hover</span><button class="btn btn--secundario is-hover" type="button" tabindex="-1">Voltar</button></div>
+            <div class="demo__item"><span class="demo__estado">Focus</span><button class="btn btn--secundario is-focus" type="button" tabindex="-1">Voltar</button></div>
+            <div class="demo__item"><span class="demo__estado">Active</span><button class="btn btn--secundario is-active" type="button" tabindex="-1">Voltar</button></div>
+            <div class="demo__item"><span class="demo__estado">Disabled</span><button class="btn btn--secundario" type="button" aria-disabled="true">Voltar</button></div>
+            <div class="demo__item"><span class="demo__estado">Erro</span><button class="btn btn--secundario" type="button" data-estado="erro">Tentar de novo</button></div>
+          </div>
+
+          <h3>Socorro</h3>
+          <div class="demo">
+            <div class="demo__item"><span class="demo__estado">Default</span><button class="btn btn--socorro" type="button">Pedir socorro</button></div>
+            <div class="demo__item"><span class="demo__estado">Hover</span><button class="btn btn--socorro is-hover" type="button" tabindex="-1">Pedir socorro</button></div>
+            <div class="demo__item"><span class="demo__estado">Focus</span><button class="btn btn--socorro is-focus" type="button" tabindex="-1">Pedir socorro</button></div>
+            <div class="demo__item"><span class="demo__estado">Active</span><button class="btn btn--socorro is-active" type="button" tabindex="-1">Pedir socorro</button></div>
+          </div>
+          <p class="texto-apoio">O botão de socorro nunca fica desabilitado nem em erro: ele sempre liga para o 199.</p>
+        </section>
+
+        <!-- CAMPO DE TEXTO -->
+        <section class="secao-componente" id="campo" aria-labelledby="titulo-campo">
+          <h2 id="titulo-campo">Campo de texto</h2>
+          <p>Rótulo sempre visível acima do campo. Contorno de 2 px em cinza 5,52:1. O erro aparece com ícone e texto, e o campo recebe <code>aria-invalid="true"</code>.</p>
+          <div class="demo demo--largo">
+            <div class="demo__item">
+              <span class="demo__estado">Default</span>
+              <div class="campo">
+                <label class="campo__rotulo" for="demo-campo-1">Seu nome</label>
+                <input class="campo__entrada" id="demo-campo-1" type="text">
+              </div>
+            </div>
+            <div class="demo__item">
+              <span class="demo__estado">Hover</span>
+              <div class="campo">
+                <label class="campo__rotulo" for="demo-campo-2">Seu nome</label>
+                <input class="campo__entrada is-hover" id="demo-campo-2" type="text" tabindex="-1">
+              </div>
+            </div>
+            <div class="demo__item">
+              <span class="demo__estado">Focus</span>
+              <div class="campo">
+                <label class="campo__rotulo" for="demo-campo-3">Seu nome</label>
+                <input class="campo__entrada is-focus" id="demo-campo-3" type="text" value="Cláu" tabindex="-1">
+              </div>
+            </div>
+            <div class="demo__item">
+              <span class="demo__estado">Active</span>
+              <div class="campo">
+                <label class="campo__rotulo" for="demo-campo-4">Seu nome</label>
+                <input class="campo__entrada is-active" id="demo-campo-4" type="text" tabindex="-1">
+              </div>
+            </div>
+            <div class="demo__item">
+              <span class="demo__estado">Disabled</span>
+              <div class="campo">
+                <label class="campo__rotulo" for="demo-campo-5">Seu nome</label>
+                <input class="campo__entrada" id="demo-campo-5" type="text" value="Cláudia" disabled>
+              </div>
+            </div>
+            <div class="demo__item">
+              <span class="demo__estado">Erro</span>
+              <div class="campo">
+                <label class="campo__rotulo" for="demo-campo-6">Celular com DDD</label>
+                <input class="campo__entrada" id="demo-campo-6" type="tel" value="9999" aria-invalid="true" aria-describedby="demo-erro-campo">
+                <p class="mensagem-erro" id="demo-erro-campo">
+                  <img src="img/icones/erro.svg" alt="" width="18" height="18">
+                  <span>Digite o celular com DDD. Exemplo: (32) 99999-0000.</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SELEÇÃO -->
+        <section class="secao-componente" id="selecao" aria-labelledby="titulo-selecao">
+          <h2 id="titulo-selecao">Seleção</h2>
+          <p>Usa o <code>&lt;select&gt;</code> nativo (funciona com leitor de tela e teclado do celular), com a seta como imagem.</p>
+          <div class="demo demo--largo">
+            <div class="demo__item">
+              <span class="demo__estado">Default</span>
+              <div class="campo">
+                <label class="campo__rotulo" for="demo-sel-1">Bairro</label>
+                <select class="campo__entrada" id="demo-sel-1"><option>Escolha o bairro</option><option>Parque Burnier</option><option>Benfica</option></select>
+              </div>
+            </div>
+            <div class="demo__item">
+              <span class="demo__estado">Hover</span>
+              <div class="campo">
+                <label class="campo__rotulo" for="demo-sel-2">Bairro</label>
+                <select class="campo__entrada is-hover" id="demo-sel-2" tabindex="-1"><option>Escolha o bairro</option></select>
+              </div>
+            </div>
+            <div class="demo__item">
+              <span class="demo__estado">Focus</span>
+              <div class="campo">
+                <label class="campo__rotulo" for="demo-sel-3">Bairro</label>
+                <select class="campo__entrada is-focus" id="demo-sel-3" tabindex="-1"><option>Parque Burnier</option></select>
+              </div>
+            </div>
+            <div class="demo__item">
+              <span class="demo__estado">Active</span>
+              <div class="campo">
+                <label class="campo__rotulo" for="demo-sel-4">Bairro</label>
+                <select class="campo__entrada is-active" id="demo-sel-4" tabindex="-1"><option>Parque Burnier</option></select>
+              </div>
+            </div>
+            <div class="demo__item">
+              <span class="demo__estado">Disabled</span>
+              <div class="campo">
+                <label class="campo__rotulo" for="demo-sel-5">Bairro</label>
+                <select class="campo__entrada" id="demo-sel-5" disabled><option>Parque Burnier</option></select>
+              </div>
+            </div>
+            <div class="demo__item">
+              <span class="demo__estado">Erro</span>
+              <div class="campo">
+                <label class="campo__rotulo" for="demo-sel-6">Bairro</label>
+                <select class="campo__entrada" id="demo-sel-6" aria-invalid="true" aria-describedby="demo-erro-sel"><option>Escolha o bairro</option></select>
+                <p class="mensagem-erro" id="demo-erro-sel">
+                  <img src="img/icones/erro.svg" alt="" width="18" height="18">
+                  <span>Escolha seu bairro na lista.</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CARTÃO -->
+        <section class="secao-componente" id="cartao" aria-labelledby="titulo-cartao">
+          <h2 id="titulo-cartao">Cartão</h2>
+          <p>Cartão interativo: o link do título cobre o cartão inteiro, e o foco aparece em volta do cartão. Usado na lista de abrigos (mapa) e nos bueiros registrados (missão).</p>
+          <ul class="demo demo--largo lista-limpa">
+            <li class="demo__item">
+              <span class="demo__estado">Default</span>
+              <div class="cartao cartao--interativo">
+                <h3><a class="cartao__link" href="mapa.html">Escola Municipal</a></h3>
+                <p class="texto-apoio">850 m a pé · 250 vagas</p>
+              </div>
+            </li>
+            <li class="demo__item">
+              <span class="demo__estado">Hover</span>
+              <div class="cartao cartao--interativo is-hover">
+                <h3><a class="cartao__link" href="mapa.html" tabindex="-1">Escola Municipal</a></h3>
+                <p class="texto-apoio">850 m a pé · 250 vagas</p>
+              </div>
+            </li>
+            <li class="demo__item">
+              <span class="demo__estado">Focus</span>
+              <div class="cartao cartao--interativo is-focus">
+                <h3><a class="cartao__link" href="mapa.html" tabindex="-1">Escola Municipal</a></h3>
+                <p class="texto-apoio">850 m a pé · 250 vagas</p>
+              </div>
+            </li>
+            <li class="demo__item">
+              <span class="demo__estado">Active</span>
+              <div class="cartao cartao--interativo is-active">
+                <h3><a class="cartao__link" href="mapa.html" tabindex="-1">Escola Municipal</a></h3>
+                <p class="texto-apoio">850 m a pé · 250 vagas</p>
+              </div>
+            </li>
+            <li class="demo__item">
+              <span class="demo__estado">Disabled</span>
+              <div class="cartao cartao--desabilitado" aria-disabled="true">
+                <h3>Ginásio</h3>
+                <p>Fechado para reforma até março.</p>
+              </div>
+            </li>
+            <li class="demo__item">
+              <span class="demo__estado">Erro</span>
+              <div class="cartao cartao--erro">
+                <h3>Rua das Flores, 120</h3>
+                <p class="mensagem-erro">
+                  <img src="img/icones/erro.svg" alt="" width="18" height="18">
+                  <span>Não enviado: sem internet.</span>
+                </p>
+                <button class="btn btn--secundario" type="button" data-estado="erro" style="align-self: flex-start">Tentar de novo</button>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- CARTÃO DE OPÇÃO -->
+        <section class="secao-componente" id="cartao-opcao" aria-labelledby="titulo-cartao-opcao">
+          <h2 id="titulo-cartao-opcao">Cartão de opção</h2>
+          <p>Checkbox ou rádio em forma de cartão, com área de toque grande. Usado em “Como você quer receber os alertas?” no cadastro.</p>
+          <fieldset class="grupo">
+            <legend class="sr-only">Exemplos de cartão de opção</legend>
+            <div class="demo demo--largo">
+              <div class="demo__item">
+                <span class="demo__estado">Default</span>
+                <label class="cartao-opcao"><input type="checkbox"><span class="cartao-opcao__marca"></span><span class="cartao-opcao__texto"><strong>SMS</strong><span>Chega sem internet</span></span></label>
+              </div>
+              <div class="demo__item">
+                <span class="demo__estado">Hover</span>
+                <label class="cartao-opcao is-hover"><input type="checkbox" tabindex="-1"><span class="cartao-opcao__marca"></span><span class="cartao-opcao__texto"><strong>SMS</strong><span>Chega sem internet</span></span></label>
+              </div>
+              <div class="demo__item">
+                <span class="demo__estado">Focus</span>
+                <label class="cartao-opcao is-focus"><input type="checkbox" tabindex="-1"><span class="cartao-opcao__marca"></span><span class="cartao-opcao__texto"><strong>SMS</strong><span>Chega sem internet</span></span></label>
+              </div>
+              <div class="demo__item">
+                <span class="demo__estado">Active (marcado)</span>
+                <label class="cartao-opcao"><input type="checkbox" checked tabindex="-1"><span class="cartao-opcao__marca"></span><span class="cartao-opcao__texto"><strong>SMS</strong><span>Chega sem internet</span></span></label>
+              </div>
+              <div class="demo__item">
+                <span class="demo__estado">Disabled</span>
+                <label class="cartao-opcao"><input type="checkbox" disabled><span class="cartao-opcao__marca"></span><span class="cartao-opcao__texto"><strong>WhatsApp</strong><span>Em breve</span></span></label>
+              </div>
+              <div class="demo__item">
+                <span class="demo__estado">Erro</span>
+                <label class="cartao-opcao is-erro"><input type="checkbox" tabindex="-1"><span class="cartao-opcao__marca"></span><span class="cartao-opcao__texto"><strong>SMS</strong><span>Chega sem internet</span></span></label>
+                <p class="mensagem-erro">
+                  <img src="img/icones/erro.svg" alt="" width="18" height="18">
+                  <span>Escolha pelo menos um jeito de receber os alertas.</span>
+                </p>
+              </div>
+            </div>
+          </fieldset>
+        </section>
+
+        <!-- SELETOR DE AVATAR (COMPOSTO) -->
+        <section class="secao-componente" id="seletor-avatar" aria-labelledby="titulo-seletor">
+          <h2 id="titulo-seletor">Seletor de avatar (componente composto)</h2>
+          <p>Grupo de rádios (<code>fieldset</code> + <code>legend</code>) em que cada opção junta imagem, nome e item do kit. A seleção funciona só com CSS (<code>:has</code>); setas do teclado trocam a opção.</p>
+          <fieldset class="avatares">
+            <legend class="sr-only">Exemplos do seletor de avatar</legend>
+            <div class="demo">
+              <div class="demo__item">
+                <span class="demo__estado">Default</span>
+                <label class="avatar-opcao"><input type="radio" name="demo-avatar" value="ana"><img src="img/avatares/ana.svg" alt="" width="140" height="140"><strong>Ana</strong><span>Apito</span></label>
+              </div>
+              <div class="demo__item">
+                <span class="demo__estado">Hover</span>
+                <label class="avatar-opcao is-hover"><input type="radio" name="demo-avatar-congelado" tabindex="-1"><img src="img/avatares/bia.svg" alt="" width="140" height="140"><strong>Bia</strong><span>Kit de socorros</span></label>
+              </div>
+              <div class="demo__item">
+                <span class="demo__estado">Focus</span>
+                <label class="avatar-opcao is-focus"><input type="radio" name="demo-avatar-congelado" tabindex="-1"><img src="img/avatares/teo.svg" alt="" width="140" height="140"><strong>Téo</strong><span>Celular</span></label>
+              </div>
+              <div class="demo__item">
+                <span class="demo__estado">Active (selecionado)</span>
+                <label class="avatar-opcao"><input type="radio" name="demo-avatar-congelado" checked tabindex="-1"><img src="img/avatares/lucas.svg" alt="" width="140" height="140"><strong>Lucas</strong><span>Lanterna</span></label>
+              </div>
+              <div class="demo__item">
+                <span class="demo__estado">Disabled</span>
+                <label class="avatar-opcao"><input type="radio" name="demo-avatar" disabled><img src="img/avatares/claudia.svg" alt="" width="140" height="140"><strong>Cláudia</strong><span>Libera no nível 5</span></label>
+              </div>
+              <div class="demo__item">
+                <span class="demo__estado">Erro</span>
+                <label class="avatar-opcao is-erro"><input type="radio" name="demo-avatar-congelado" tabindex="-1"><img src="img/avatares/joaquim.svg" alt="" width="140" height="140"><strong>Seu Joaquim</strong><span>Rádio</span></label>
+                <p class="mensagem-erro">
+                  <img src="img/icones/erro.svg" alt="" width="18" height="18">
+                  <span>Escolha um avatar para continuar.</span>
+                </p>
+              </div>
+            </div>
+          </fieldset>
+        </section>
+
+        <!-- NÍVEL DE RISCO -->
+        <section class="secao-componente" id="nivel" aria-labelledby="titulo-nivel" style="border-bottom: 0">
+          <h2 id="titulo-nivel">Nível de risco</h2>
+          <p>Forma + cor + palavra: quem não distingue cores ainda reconhece o nível pela forma do ícone.</p>
+          <div class="grupo-botoes">
+            <span class="nivel nivel--normal"><img src="img/icones/nivel-normal.svg" alt="" width="14" height="14">Normal</span>
+            <span class="nivel nivel--atencao"><img src="img/icones/nivel-atencao.svg" alt="" width="14" height="14">Atenção</span>
+            <span class="nivel nivel--alerta"><img src="img/icones/nivel-alerta.svg" alt="" width="14" height="14">Alerta</span>
+            <span class="nivel nivel--emergencia"><img src="img/icones/nivel-emergencia.svg" alt="" width="14" height="14">Emergência</span>
+          </div>
+        </section>
+      </main>
+
+      <footer class="rodape">
+        <div class="container rodape__inner">
+          <span>Protótipo · Digital Nomads · dados fictícios</span>
+          <nav aria-label="Telas do protótipo">
+            <a href="cadastro.html">Cadastro</a>
+            <a href="alerta.html">Simular alerta</a>
+            <a href="painel.html">Painel da Defesa Civil</a>
+            <a href="componentes.html" aria-current="page">Componentes</a>
+          </nav>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
