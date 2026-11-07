@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;display=swap">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/app.js" defer></script>
+    <script src="js/painel-autoridades.js" defer></script>
   </head>
   <body>
     <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -20,8 +21,9 @@
             Painel da Defesa Civil
           </a>
           <span class="etiqueta-ficticio">Dados fictícios</span>
-          <span class="painel-plantao">Juiz de Fora · Renata · plantão · atualizado às 21h52</span>
-          <a class="btn" href="alerta.html">Ver alerta enviado</a>
+          <span class="painel-plantao">Juiz de Fora · Renata · plantão · atualizado às <span id="hora-painel">21h52</span></span>
+          <!-- onclick: simula a chegada de dados novos nos indicadores -->
+          <button class="btn" type="button" onclick="atualizarPainel()">Atualizar painel</button>
         </div>
       </header>
 
@@ -38,10 +40,11 @@
 
         <div class="indicadores">
           <div class="indicador"><span>Regiões em alerta ou emergência</span><strong>3 de 7</strong></div>
-          <div class="indicador"><span>Pessoas alertadas</span><strong>18.420</strong></div>
-          <div class="indicador"><span>Confirmaram segurança</span><strong>3.115</strong></div>
-          <div class="indicador indicador--critico"><span>Sem confirmação em área de risco</span><strong>642</strong></div>
+          <div class="indicador"><span>Pessoas alertadas</span><strong id="ind-alertadas">18.420</strong></div>
+          <div class="indicador"><span>Confirmaram segurança</span><strong id="ind-confirmados">3.115</strong></div>
+          <div class="indicador indicador--critico" id="ind-sem-confirmacao-caixa"><span>Sem confirmação em área de risco</span><strong id="ind-sem-confirmacao">642</strong></div>
           <div class="indicador"><span>Vigias acionados</span><strong>37</strong></div>
+          <div class="indicador"><span>Ocorrências abertas</span><strong id="ind-ocorrencias">2</strong></div>
         </div>
 
         <div class="colunas colunas--painel" style="gap: var(--espaco-4)">
@@ -100,20 +103,44 @@
               <p class="texto-apoio" id="acoes-vazio" hidden>Nenhum bairro com esse nível precisa de ação agora.</p>
             </section>
 
+            <!-- Situação dos abrigos: filtro + botão de atualizar -->
             <section class="bloco" aria-labelledby="titulo-abrigos">
-              <h2 id="titulo-abrigos">Abrigos abertos</h2>
-              <div class="ocupacao">
-                <div class="ocupacao__linha"><strong>Abrigo 1 · Sudeste</strong><span>180 de 250</span></div>
-                <div class="progresso__barra" role="progressbar" aria-valuemin="0" aria-valuemax="250" aria-valuenow="180" aria-label="Lotação Abrigo 1 · Sudeste"><span style="width: 72%"></span></div>
+              <div class="bloco__cabeca">
+                <h2 id="titulo-abrigos">Situação dos abrigos</h2>
+                <span class="texto-apoio">atualizado às <span id="hora-abrigos">21h52</span></span>
               </div>
-              <div class="ocupacao">
-                <div class="ocupacao__linha"><strong>Abrigo 2 · Leste</strong><span>95 de 200</span></div>
-                <div class="progresso__barra" role="progressbar" aria-valuemin="0" aria-valuemax="200" aria-valuenow="95" aria-label="Lotação Abrigo 2 · Leste"><span style="width: 48%"></span></div>
+              <div class="campo">
+                <label class="campo__rotulo" for="filtro-abrigos-painel">Mostrar</label>
+                <select class="campo__entrada" id="filtro-abrigos-painel" onchange="filtrarAbrigosPainel()">
+                  <option value="todos">Todos os abrigos</option>
+                  <option value="Com vagas">Com vagas</option>
+                  <option value="Quase cheio">Quase cheios</option>
+                  <option value="Lotado">Lotados</option>
+                </select>
               </div>
-              <div class="ocupacao">
-                <div class="ocupacao__linha"><strong>Abrigo 3 · Nordeste</strong><span>40 de 120</span></div>
-                <div class="progresso__barra" role="progressbar" aria-valuemin="0" aria-valuemax="120" aria-valuenow="40" aria-label="Lotação Abrigo 3 · Nordeste"><span style="width: 33%"></span></div>
+              <div class="ocupacao abrigo-painel" id="abrigo-1" data-ocupadas="180" data-total="250" data-situacao="Com vagas">
+                <div class="ocupacao__linha"><strong>Escola Municipal · Parque Burnier</strong><span id="abrigo-1-numeros">180 de 250</span></div>
+                <div class="progresso__barra" role="progressbar" aria-valuemin="0" aria-valuemax="250" aria-valuenow="180" aria-label="Lotação Escola Municipal" id="abrigo-1-barra"><span style="width: 72%"></span></div>
+                <span class="situacao situacao--ok" id="abrigo-1-situacao">Com vagas</span>
               </div>
+              <div class="ocupacao abrigo-painel" id="abrigo-2" data-ocupadas="52" data-total="60" data-situacao="Quase cheio">
+                <div class="ocupacao__linha"><strong>Igreja do bairro · Parque Burnier</strong><span id="abrigo-2-numeros">52 de 60</span></div>
+                <div class="progresso__barra" role="progressbar" aria-valuemin="0" aria-valuemax="60" aria-valuenow="52" aria-label="Lotação Igreja do bairro" id="abrigo-2-barra"><span style="width: 87%"></span></div>
+                <span class="situacao situacao--atencao" id="abrigo-2-situacao">Quase cheio</span>
+              </div>
+              <div class="ocupacao abrigo-painel" id="abrigo-3" data-ocupadas="95" data-total="200" data-situacao="Com vagas">
+                <div class="ocupacao__linha"><strong>Centro Comunitário · Linhares</strong><span id="abrigo-3-numeros">95 de 200</span></div>
+                <div class="progresso__barra" role="progressbar" aria-valuemin="0" aria-valuemax="200" aria-valuenow="95" aria-label="Lotação Centro Comunitário" id="abrigo-3-barra"><span style="width: 48%"></span></div>
+                <span class="situacao situacao--ok" id="abrigo-3-situacao">Com vagas</span>
+              </div>
+              <div class="ocupacao abrigo-painel" id="abrigo-4" data-ocupadas="40" data-total="120" data-situacao="Com vagas">
+                <div class="ocupacao__linha"><strong>Salão Paroquial · Grama</strong><span id="abrigo-4-numeros">40 de 120</span></div>
+                <div class="progresso__barra" role="progressbar" aria-valuemin="0" aria-valuemax="120" aria-valuenow="40" aria-label="Lotação Salão Paroquial" id="abrigo-4-barra"><span style="width: 33%"></span></div>
+                <span class="situacao situacao--ok" id="abrigo-4-situacao">Com vagas</span>
+              </div>
+              <p class="texto-apoio" id="abrigos-painel-vazio" hidden>Nenhum abrigo nessa situação agora.</p>
+              <!-- onclick: simula a chegada de pessoas e recalcula a situação de cada abrigo -->
+              <button class="btn btn--secundario" type="button" onclick="atualizarAbrigos()">Atualizar lotação</button>
             </section>
 
             <section class="bloco" aria-labelledby="titulo-relatos">
@@ -138,9 +165,161 @@
           </div>
         </div>
 
+        <div class="colunas colunas--iguais" style="gap: var(--espaco-4)">
+          <!-- Ocorrências: filtros + lista + botões de avançar o atendimento -->
+          <section class="coluna bloco" aria-labelledby="titulo-ocorrencias">
+            <div class="bloco__cabeca">
+              <h2 id="titulo-ocorrencias">Ocorrências</h2>
+              <span class="texto-apoio" id="contagem-ocorrencias">5 na lista</span>
+            </div>
+            <div class="campos-lado-a-lado">
+              <div class="campo">
+                <label class="campo__rotulo" for="filtro-tipo">Tipo</label>
+                <select class="campo__entrada" id="filtro-tipo" onchange="filtrarOcorrencias()">
+                  <option value="todos">Todos os tipos</option>
+                  <option value="alagamento">Alagamento</option>
+                  <option value="deslizamento">Deslizamento</option>
+                  <option value="arvore">Árvore caída</option>
+                  <option value="bueiro">Bueiro entupido</option>
+                  <option value="outro">Outro</option>
+                </select>
+              </div>
+              <div class="campo">
+                <label class="campo__rotulo" for="filtro-status">Situação</label>
+                <select class="campo__entrada" id="filtro-status" onchange="filtrarOcorrencias()">
+                  <option value="todos">Todas</option>
+                  <option value="aberta">Abertas</option>
+                  <option value="atendimento">Em atendimento</option>
+                  <option value="resolvida">Resolvidas</option>
+                </select>
+              </div>
+            </div>
+            <ul class="lista-ocorrencias lista-limpa" id="lista-ocorrencias">
+              <li class="ocorrencia" id="oc-1" data-tipo="deslizamento" data-status="aberta">
+                <span><strong>Deslizamento de terra</strong><br><small>Parque Burnier · gravidade alta · 21h31</small></span>
+                <span class="situacao situacao--critico" id="oc-1-status">Aberta</span>
+                <button class="btn btn--primario" type="button" id="oc-1-botao" onclick="avancarOcorrencia('oc-1')">Iniciar atendimento</button>
+              </li>
+              <li class="ocorrencia" id="oc-2" data-tipo="alagamento" data-status="atendimento">
+                <span><strong>Alagamento</strong><br><small>Vila Ideal · gravidade alta · 21h18</small></span>
+                <span class="situacao situacao--atencao" id="oc-2-status">Em atendimento</span>
+                <button class="btn btn--secundario" type="button" id="oc-2-botao" onclick="avancarOcorrencia('oc-2')">Marcar como resolvida</button>
+              </li>
+              <li class="ocorrencia" id="oc-3" data-tipo="arvore" data-status="aberta">
+                <span><strong>Árvore caída</strong><br><small>Grama · gravidade média · 21h05</small></span>
+                <span class="situacao situacao--critico" id="oc-3-status">Aberta</span>
+                <button class="btn btn--primario" type="button" id="oc-3-botao" onclick="avancarOcorrencia('oc-3')">Iniciar atendimento</button>
+              </li>
+              <li class="ocorrencia" id="oc-4" data-tipo="outro" data-status="atendimento">
+                <span><strong>Queda de energia</strong><br><small>Linhares · gravidade média · 20h47</small></span>
+                <span class="situacao situacao--atencao" id="oc-4-status">Em atendimento</span>
+                <button class="btn btn--secundario" type="button" id="oc-4-botao" onclick="avancarOcorrencia('oc-4')">Marcar como resolvida</button>
+              </li>
+              <li class="ocorrencia" id="oc-5" data-tipo="bueiro" data-status="resolvida">
+                <span><strong>Bueiro entupido</strong><br><small>Benfica · gravidade baixa · 19h30</small></span>
+                <span class="situacao situacao--ok" id="oc-5-status">Resolvida</span>
+                <button class="btn btn--secundario" type="button" id="oc-5-botao" aria-disabled="true" onclick="avancarOcorrencia('oc-5')">Concluída</button>
+              </li>
+            </ul>
+            <p class="texto-apoio" id="ocorrencias-vazio" hidden>Nenhuma ocorrência com esse filtro.</p>
+          </section>
+
+          <div class="coluna" style="gap: var(--espaco-4)">
+            <!-- Formulário para simular o registro de uma ocorrência -->
+            <section class="bloco" aria-labelledby="titulo-registrar">
+              <h2 id="titulo-registrar">Registrar ocorrência</h2>
+              <form class="formulario formulario--painel" id="form-ocorrencia" onsubmit="registrarOcorrencia(event)" novalidate>
+                <div class="campos-lado-a-lado">
+                  <div class="campo">
+                    <label class="campo__rotulo" for="ocorrencia-tipo">Tipo</label>
+                    <select class="campo__entrada" id="ocorrencia-tipo">
+                      <option value="">Escolha</option>
+                      <option value="alagamento">Alagamento</option>
+                      <option value="deslizamento">Deslizamento</option>
+                      <option value="arvore">Árvore caída</option>
+                      <option value="bueiro">Bueiro entupido</option>
+                      <option value="outro">Outro</option>
+                    </select>
+                  </div>
+                  <div class="campo">
+                    <label class="campo__rotulo" for="ocorrencia-bairro">Bairro</label>
+                    <select class="campo__entrada" id="ocorrencia-bairro">
+                      <option value="">Escolha</option>
+                      <option>Parque Burnier</option>
+                      <option>Vila Ideal</option>
+                      <option>Linhares</option>
+                      <option>Grama</option>
+                      <option>Benfica</option>
+                      <option>Santa Luzia</option>
+                      <option>Centro</option>
+                      <option>São Pedro</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="campo">
+                  <label class="campo__rotulo" for="ocorrencia-gravidade">Gravidade</label>
+                  <select class="campo__entrada" id="ocorrencia-gravidade">
+                    <option value="baixa">Baixa</option>
+                    <option value="média" selected>Média</option>
+                    <option value="alta">Alta</option>
+                  </select>
+                </div>
+                <div class="campo">
+                  <label class="campo__rotulo" for="ocorrencia-descricao">O que aconteceu <span class="campo__opcional">(opcional)</span></label>
+                  <textarea class="campo__entrada" id="ocorrencia-descricao" placeholder="Ex.: muro caído na rua de cima, duas casas em risco"></textarea>
+                </div>
+                <button class="btn btn--primario" type="submit">Registrar ocorrência</button>
+              </form>
+            </section>
+
+            <!-- Emissão de alerta: a mensagem muda conforme o bairro e o nível escolhidos -->
+            <section class="bloco" aria-labelledby="titulo-emitir">
+              <h2 id="titulo-emitir">Emitir alerta para moradores</h2>
+              <div class="campos-lado-a-lado">
+                <div class="campo">
+                  <label class="campo__rotulo" for="alerta-bairro">Bairro</label>
+                  <select class="campo__entrada" id="alerta-bairro" onchange="atualizarPreviaAlerta()">
+                    <option>Parque Burnier</option>
+                    <option>Vila Ideal</option>
+                    <option>Linhares</option>
+                    <option>Grama</option>
+                    <option>Benfica</option>
+                    <option>Santa Luzia</option>
+                  </select>
+                </div>
+                <div class="campo">
+                  <label class="campo__rotulo" for="alerta-nivel">Nível</label>
+                  <select class="campo__entrada" id="alerta-nivel" onchange="atualizarPreviaAlerta()">
+                    <option value="atencao">Atenção</option>
+                    <option value="alerta" selected>Alerta</option>
+                    <option value="emergencia">Emergência</option>
+                    <option value="normal">Normal (encerrar alerta)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="alerta alerta--compacto" id="previa-alerta" data-nivel="alerta" aria-live="polite">
+                <span class="nivel nivel--alerta" id="previa-selo">
+                  <img src="img/icones/nivel-alerta.svg" alt="" width="14" height="14" id="previa-icone">
+                  <span id="previa-nivel">Alerta</span>
+                </span>
+                <p><strong>Prévia da mensagem:</strong> <span id="previa-texto">Alerta para Parque Burnier: chuva forte nas próximas horas. Quem mora em encosta ou perto de rio deve ir para o abrigo.</span></p>
+              </div>
+              <button class="btn btn--primario" type="button" onclick="enviarAlerta()">Enviar alerta</button>
+              <h3 class="texto-apoio">Alertas enviados neste plantão</h3>
+              <ul class="lista-limpa lista-enviados" id="alertas-enviados">
+                <li><strong>21h40</strong> · Alerta · Parque Burnier</li>
+              </ul>
+            </section>
+          </div>
+        </div>
+
         <section class="bloco" aria-labelledby="titulo-canais">
-          <h2 id="titulo-canais">Entrega do alerta por canal</h2>
-          <div class="canais">
+          <div class="bloco__cabeca">
+            <h2 id="titulo-canais">Entrega do alerta por canal</h2>
+            <!-- onclick: mostra ou esconde os detalhes de entrega -->
+            <button class="btn btn--secundario btn--pequeno" type="button" id="botao-canais" aria-expanded="true" aria-controls="canais" onclick="alternarSecao('botao-canais', 'canais')">Ocultar detalhes</button>
+          </div>
+          <div class="canais" id="canais">
             <div class="ocupacao">
               <div class="ocupacao__linha"><strong>Push no app</strong><span>12.300</span></div>
               <div class="progresso__barra" style="height: 10px"><span style="width: 67%; background: var(--cor-teal);"></span></div>
@@ -155,7 +334,7 @@
             </div>
             <div class="ocupacao">
               <div class="ocupacao__linha"><strong>Avisados por vigias</strong><span>148 vizinhos</span></div>
-              <div class="progresso__barra" style="height: 10px"><span style="width: 8%; background: var(--cor-teal); background: var(--cor-texto-2);"></span></div>
+              <div class="progresso__barra" style="height: 10px"><span style="width: 8%; background: var(--cor-texto-2);"></span></div>
             </div>
           </div>
         </section>
@@ -168,6 +347,7 @@
             <a href="cadastro.html">Cadastro</a>
             <a href="alerta.html">Simular alerta</a>
             <a href="index.html">App do morador</a>
+            <a href="dashboard.html">Dashboard do morador</a>
             <a href="componentes.html">Componentes</a>
           </nav>
         </div>
