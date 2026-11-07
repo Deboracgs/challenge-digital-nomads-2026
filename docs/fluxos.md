@@ -120,7 +120,7 @@ Os nomes seguem o design system da Sprint 1. Os estados de cada componente estã
 | **alerta.html** (Fluxo 2) | Cabeçalho · Botão de socorro · Faixa de alerta · Cartão de alerta (`role="alert"`) · Nível de risco grande (Alerta) · Caixa de abrigo · Botão primário e secundário grandes em bloco · Mapa da rota · Legenda · Rodapé |
 | **seguranca.html** (Fluxo 2) | Cabeçalho · Botão de socorro · Faixa de alerta · Cartão de confirmação · Lista de pessoas · Botão primário e secundário grandes em bloco · Rodapé |
 | **letra-grande.html** (Fluxo 2, alternativo) | Cabeçalho (letra grande) · Saudação com avatar · Status grande · Botão primário com ícone (Ouvir aviso, com estado de erro) · Botão secundário com ícone (Ligar) · Caixa de abrigo · Botão de socorro · Rodapé |
-| **mapa.html** | Cabeçalho · Menu principal · Faixa de risco · Mapa da rota · Legenda · Cartão interativo (abrigos) · Cartão desabilitado (abrigo fechado) · Rodapé · Barra de navegação inferior |
+| **dashboard.html** | Cabeçalho · Menu principal · Faixa de risco · Mapa da rota · Legenda · Cartão interativo (abrigos) · Cartão desabilitado (abrigo fechado) · Rodapé · Barra de navegação inferior |
 | **perfil.html** | Cabeçalho · Menu principal · Cartão · Avatar · Pílula de conquista · Barra de progresso (conquista) · Números · Conquistas (medalhas, uma bloqueada) · Placa Bairro Preparado · Ranking · Dica do Teto · Rodapé · Barra de navegação inferior |
 | **painel.html** | Cabeçalho do painel · Etiqueta "Dados fictícios" · Filtros · Indicadores · Bloco · Mapa de calor + rótulos · Legenda · Lista de ações · Botões (com estado desabilitado) · Ocupação dos abrigos · Relatos · Entrega por canal · Rodapé |
 | **componentes.html** | Documentação dos estados de: Botão, Campo de texto, Seleção, Cartão, Cartão de opção, Seletor de avatar, Nível de risco |
@@ -175,7 +175,7 @@ flowchart TD
     SEG -- "Voltar ao início" --> INI
     INI -- "Letra grande" --> LG
 
-    MAP["mapa.html<br/>Mapa e abrigos"]
+    MAP["dashboard.html<br/>Mapa e abrigos"]
     PAI["painel.html<br/>Defesa Civil · Renata"]
     INI -- "Mapa / Ver rota do abrigo" --> MAP
     INI -- "Perfil / Ranking" --> PER
