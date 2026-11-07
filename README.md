@@ -18,9 +18,20 @@ Projeto do grupo **Digital Nomads** para a disciplina de Front-End Design.
   - tem o botão "Pedir socorro", que liga para o 199.
 - **Letra grande:** versão simplificada para quem tem baixa visão, com leitura do aviso em voz alta.
 - **Perfil:** nível, conquistas e posição do bairro no ranking.
+- **Dashboard do morador (`dashboard.html`):**
+  - orientação que muda conforme o nível de risco escolhido (na emergência, aparece também um `alert()`);
+  - mapa do Google incorporado: "Ver no mapa" troca o abrigo exibido, e há links para a rota a pé no Google Maps;
+  - rota salva ilustrativa, que funciona sem internet e pode ser mostrada ou ocultada;
+  - abrigos com filtro (com vagas, acessíveis, aceitam animais) e botão "Atualizar informações" que muda as vagas;
+  - áreas de risco e orientações de segurança (antes, durante e depois da chuva) com botões de mostrar e ocultar.
 
 **Defesa Civil**
-- **Painel:** mapa de calor da cidade, filtros por nível de risco, bairros onde agir primeiro, acionamento de vigias, lotação dos abrigos e validação de relatos de moradores.
+- **Painel:** mapa de calor da cidade, filtros por nível de risco, bairros onde agir primeiro, acionamento de vigias e validação de relatos de moradores.
+- **Indicadores:** o botão "Atualizar painel" simula dados novos.
+- **Situação dos abrigos:** filtro por situação (com vagas, quase cheio, lotado) e botão "Atualizar lotação". Quando um abrigo lota, aparece um aviso.
+- **Ocorrências:** filtros por tipo e por situação. O botão de cada ocorrência avança o atendimento (aberta → em atendimento → resolvida).
+- **Registrar ocorrência:** formulário que valida os campos e coloca a nova ocorrência no topo da lista.
+- **Emitir alerta:** a prévia da mensagem muda conforme o bairro e o nível escolhidos, e o envio fica registrado no plantão.
 
 Os dados são fictícios e não há back-end: os envios são simulados no navegador.
 
@@ -65,16 +76,22 @@ Detalhes de cada fluxo (personas, caminhos alternativos e pontos de falha) e o f
 ├── alerta.html         Alerta da Defesa Civil e rota até o abrigo
 ├── seguranca.html      Confirmação "estou em segurança"
 ├── letra-grande.html   Modo letra grande
-├── mapa.html           Mapa do bairro e abrigos
+├── dashboard.html      Dashboard do morador: risco, mapa, rotas e abrigos
 ├── painel.html         Painel da Defesa Civil
 ├── componentes.html    Componentes do design system com todos os estados
 ├── css/style.css       Estilos: tokens, componentes, páginas e desktop
 ├── js/app.js           Comportamento: validação, missão, painel, leitura em voz alta
+├── js/dashboard-morador.js   Interações do dashboard do morador (Sprint 2)
+├── js/painel-autoridades.js  Interações do painel das autoridades (Sprint 2)
 ├── docs/               Documentação dos fluxos
 └── img/                Logo, mascote Teto, selo e avatares
     ├── icones/         Ícones da interface
     └── mapas/          Mapa da rota e mapa do painel
 ```
+
+## JavaScript da Sprint 2
+
+As interações do dashboard e do painel usam os conceitos vistos em aula: `function`, `if/else`, `document.getElementById()`, `onclick`/`onchange` no HTML e `alert()`. Cada função está comentada em `js/dashboard-morador.js` e `js/painel-autoridades.js`. Os textos digitados no formulário entram na página com `textContent`, então não viram HTML.
 
 ## Design system
 

@@ -627,6 +627,47 @@ select.campo__entrada:disabled { cursor: not-allowed; }
 }
 .demo .avatar-opcao { width: 100%; }
 
+/* 5.6 Dashboard do morador e painel das autoridades (Sprint 2) */
+.dashboard-topo { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--espaco-3); }
+.dashboard-topo h1 { font-size: var(--texto-titulo-alerta); }
+
+.alerta--compacto { box-shadow: none; padding: var(--espaco-4); gap: var(--espaco-3); }
+.alerta[data-nivel="normal"] { border-left-color: var(--cor-normal); }
+.alerta--compacto h3 { font-size: var(--texto-subtitulo); margin-bottom: var(--espaco-1); }
+.alerta--compacto .nivel { align-self: flex-start; }
+
+.mapa-google {
+  width: 100%; aspect-ratio: 4 / 3; border: 0;
+  border-radius: var(--raio-cartao); background: var(--cor-superficie);
+}
+.orientacoes { padding-left: 1.2em; display: flex; flex-direction: column; gap: var(--espaco-1); }
+
+/* Situação de abrigo ou ocorrência: sempre com a palavra, nunca só a cor */
+.situacao {
+  display: inline-flex; align-items: center; align-self: flex-start;
+  height: 26px; padding: 0 var(--espaco-3); border-radius: var(--raio-pilula);
+  font-size: 13px; font-weight: 700; white-space: nowrap;
+}
+.situacao--ok { background: var(--cor-normal); color: var(--cor-branco); }
+.situacao--atencao { background: var(--cor-atencao); color: var(--cor-navy); }
+.situacao--critico { background: var(--cor-emergencia); color: var(--cor-branco); }
+.abrigo-painel { padding-bottom: var(--espaco-2); }
+
+.campos-lado-a-lado { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--espaco-3); }
+.formulario--painel { gap: var(--espaco-4); }
+.formulario--painel .btn, .bloco > .btn { align-self: flex-start; }
+
+.lista-ocorrencias { display: flex; flex-direction: column; gap: var(--espaco-2); }
+.ocorrencia {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--espaco-2) var(--espaco-3);
+  padding: 10px var(--espaco-3); border-radius: var(--raio-placa); background: var(--cor-superficie);
+}
+.ocorrencia > span:first-child { flex: 1 1 100%; line-height: 1.35; }
+.ocorrencia small { font-size: 13px; color: var(--cor-texto-2); }
+.ocorrencia .btn, .btn--pequeno { min-height: 40px; padding: 0 14px; font-size: 15px; }
+.bloco__cabeca .btn--pequeno { margin-left: auto; }
+.lista-enviados { display: flex; flex-direction: column; gap: var(--espaco-1); font-size: var(--texto-legenda); }
+
 /* 6. DESKTOP --------------------------------------------------------------- */
 @media (min-width: 900px) {
   .container { padding-inline: var(--espaco-6); }
@@ -675,10 +716,12 @@ select.campo__entrada:disabled { cursor: not-allowed; }
 
   .painel-plantao { width: auto; margin-left: auto; }
   .painel-cabecalho .btn { margin-left: 0; }
-  .indicadores { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .indicadores { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   .mapa__rotulos { display: block; }
   .canais { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .colunas--painel .coluna--principal { flex: 1.8 1 0; }
   .relato > span { flex: 1 1 160px; }
+  .ocorrencia > span:first-child { flex: 1 1 200px; }
+  .dashboard-topo h1 { font-size: var(--texto-titulo-tela); }
   .cabecalho .btn { min-height: var(--alvo-toque); padding: 0 var(--espaco-5); font-size: 17px; }
 }
