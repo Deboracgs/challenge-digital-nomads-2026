@@ -1,4 +1,4 @@
-# Cidade Resiliente · Fluxos, componentes e navegação
+# Guardiões JF · Fluxos, componentes e navegação
 
 Sprint 2 · Front-End Design · grupo Digital Nomads
 

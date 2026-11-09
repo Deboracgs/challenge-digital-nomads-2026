@@ -1,4 +1,4 @@
-# Cidade Resiliente
+# Guardiões JF
 
 App de prevenção a desastres para Juiz de Fora/MG. Ele avisa os moradores de áreas de risco antes de chuvas fortes e leva cada um até o abrigo mais próximo. Quando não há risco, o app mantém o bairro preparado com missões simples. Do outro lado, a Defesa Civil acompanha tudo por um painel.
 

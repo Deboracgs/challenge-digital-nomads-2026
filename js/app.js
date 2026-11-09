@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Cidade Resiliente · Digital Nomads
+   Guardiões JF · Digital Nomads
    JavaScript único do projeto, sem framework. Cada bloco só age se a página
    tiver os elementos dele, então o mesmo arquivo é carregado em todas as telas.
 
@@ -17,7 +17,7 @@
   /* O protótipo guarda nome, avatar e progresso no localStorage. Se o
      navegador bloquear (janela anônima, por exemplo), tudo segue funcionando
      com os dados de exemplo. */
-  var PREFIXO = 'cidade-resiliente:';
+  var PREFIXO = 'guardioes-jf:';
 
   function ler(chave) {
     try {
