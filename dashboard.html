@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard do morador · Guardiões JF</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/app.js" defer></script>
+    <script src="js/dashboard-morador.js" defer></script>
+  </head>
+  <body>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+    <div class="app app--com-tabbar">
+      <header class="cabecalho">
+        <div class="container cabecalho__inner">
+          <a class="marca" href="index.html">
+            <img src="img/logo.svg" alt="" width="40" height="40">
+            Guardiões JF
+          </a>
+          <nav class="nav-principal" aria-label="Principal">
+            <a href="index.html">Meu bairro</a>
+            <a href="dashboard.html" aria-current="page">Mapa e abrigos</a>
+            <a href="missao.html">Missões</a>
+            <a href="perfil.html#ranking">Ranking</a>
+            <a href="letra-grande.html">Letra grande</a>
+          </nav>
+          <a class="chip-perfil" href="perfil.html" aria-label="Meu perfil, nível 3">
+            <img src="img/avatares/claudia-rosto.svg" alt="" width="36" height="36" data-usuario="rosto">
+            Nível 3
+          </a>
+        </div>
+      </header>
+
+      <div class="faixa-risco">
+        <div class="container faixa-risco__inner">
+          <span class="nivel nivel--normal">
+            <img src="img/icones/nivel-normal.svg" alt="" width="14" height="14">
+            Normal
+          </span>
+          <span>Parque Burnier, agora. Sem alertas da Defesa Civil.</span>
+        </div>
+      </div>
+
+      <main id="conteudo" class="container conteudo coluna">
+        <div class="dashboard-topo">
+          <div>
+            <h1>Dashboard do morador</h1>
+            <p class="texto-apoio">Áreas de risco, abrigos e o que fazer em cada situação · atualizado às <span id="hora-atualizacao">21h52</span></p>
+          </div>
+          <!-- onclick: atualiza as vagas dos abrigos e o horário -->
+          <button class="btn btn--primario btn--amigavel" type="button" onclick="atualizarDashboard()">Atualizar informações</button>
+        </div>
+        <p class="aviso" role="status" id="status-dashboard"></p>
+
+        <div class="colunas">
+          <div class="coluna coluna--principal">
+
+            <!-- 1. Mensagem de alerta conforme o nível escolhido -->
+            <section class="cartao" aria-labelledby="titulo-niveis">
+              <h2 id="titulo-niveis">O que fazer em cada nível de risco</h2>
+              <div class="campo">
+                <label class="campo__rotulo" for="escolha-nivel">Escolha um nível para ver a orientação</label>
+                <!-- onchange: troca a mensagem assim que a pessoa escolhe outra opção -->
+                <select class="campo__entrada" id="escolha-nivel" onchange="mudarNivel()">
+                  <option value="normal">Normal</option>
+                  <option value="atencao">Atenção</option>
+                  <option value="alerta">Alerta</option>
+                  <option value="emergencia">Emergência</option>
+                </select>
+              </div>
+              <div class="alerta alerta--compacto" id="cartao-nivel" data-nivel="normal" aria-live="polite">
+                <span class="nivel nivel--normal nivel--grande" id="selo-nivel">
+                  <img src="img/icones/nivel-normal.svg" alt="" width="20" height="20" id="selo-nivel-icone">
+                  <span id="selo-nivel-texto">Normal</span>
+                </span>
+                <div>
+                  <h3 id="titulo-orientacao">Sem risco agora</h3>
+                  <p id="texto-orientacao">Aproveite o tempo bom para conhecer o caminho até o abrigo e deixar a mochila de emergência pronta.</p>
+                </div>
+              </div>
+            </section>
+
+            <!-- 2. Mapa e rotas -->
+            <section class="coluna" aria-labelledby="titulo-mapa" style="gap: var(--espaco-3)" id="mapa">
+              <div class="bloco__cabeca">
+                <h2 id="titulo-mapa" style="font-size: var(--texto-titulo-alerta)">Mapa e rotas</h2>
+                <span class="texto-apoio" id="mapa-legenda">Mostrando: Escola Municipal (exemplo) · Parque Burnier</span>
+              </div>
+              <iframe class="mapa-google" id="mapa-google" title="Mapa do Google com o abrigo selecionado" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Parque%20Burnier%2C%20Juiz%20de%20Fora%20-%20MG&amp;z=15&amp;output=embed"></iframe>
+              <div class="grupo-botoes">
+                <a class="btn btn--primario btn--amigavel" id="link-rota" href="https://www.google.com/maps/dir/?api=1&amp;destination=Parque%20Burnier%2C%20Juiz%20de%20Fora%20-%20MG&amp;travelmode=walking" target="_blank" rel="noopener">Abrir rota a pé no Google Maps</a>
+                <!-- onclick: mostra ou esconde o mapa ilustrativo, que funciona sem internet -->
+                <button class="btn btn--secundario btn--amigavel" type="button" id="botao-rota-salva" aria-expanded="false" aria-controls="rota-salva" onclick="alternarInformacao('botao-rota-salva', 'rota-salva')">Mostrar rota salva (sem internet)</button>
+              </div>
+              <figure class="mapa-rota" id="rota-salva" hidden>
+                <img src="img/mapas/rota-abrigo.svg" alt="Mapa ilustrativo com a rota a pé da sua casa até a Escola Municipal, 850 metros" width="520" height="420">
+                <figcaption class="legenda">
+                  <span>
+                    <img src="img/icones/legenda-voce.svg" alt="" width="14" height="14">
+                    Você
+                  </span>
+                  <span>
+                    <img src="img/icones/legenda-abrigo.svg" alt="" width="14" height="14">
+                    Abrigo
+                  </span>
+                  <span>Rota salva · funciona sem internet</span>
+                </figcaption>
+              </figure>
+            </section>
+
+            <!-- 3. Abrigos com filtro -->
+            <section class="coluna" aria-labelledby="titulo-abrigos" style="gap: var(--espaco-3)">
+              <h2 id="titulo-abrigos" style="font-size: var(--texto-titulo-alerta)">Abrigos seguros</h2>
+              <div class="campo">
+                <label class="campo__rotulo" for="filtro-abrigos">Mostrar</label>
+                <!-- onchange: filtra a lista de abrigos -->
+                <select class="campo__entrada" id="filtro-abrigos" onchange="filtrarAbrigos()">
+                  <option value="todos">Todos os abrigos</option>
+                  <option value="vagas">Só os abertos com vagas</option>
+                  <option value="acessivel">Acessíveis para cadeira de rodas</option>
+                  <option value="animais">Que aceitam animais</option>
+                </select>
+              </div>
+              <ul class="lista-registros lista-limpa" id="lista-abrigos">
+                <li class="cartao abrigo-item" data-aberto="sim" data-vagas="70" data-acessivel="nao" data-animais="nao">
+                  <h3>Escola Municipal (exemplo)</h3>
+                  <p class="texto-apoio">Parque Burnier · 850 m a pé · abre quando há alerta</p>
+                  <p><strong data-vagas-texto>70 vagas livres</strong> de 250</p>
+                  <div class="grupo-botoes">
+                    <button class="btn btn--secundario btn--amigavel" type="button" onclick="mostrarNoMapa('escola')">Ver no mapa</button>
+                    <a class="btn btn--secundario btn--amigavel" href="https://www.google.com/maps/dir/?api=1&amp;destination=Parque%20Burnier%2C%20Juiz%20de%20Fora%20-%20MG&amp;travelmode=walking" target="_blank" rel="noopener">Rota no Google Maps</a>
+                  </div>
+                </li>
+                <li class="cartao abrigo-item" data-aberto="sim" data-vagas="8" data-acessivel="sim" data-animais="nao">
+                  <h3>Igreja do bairro (exemplo)</h3>
+                  <p class="texto-apoio">Parque Burnier · 1,2 km · abrigo de apoio · acessível para cadeira de rodas</p>
+                  <p><strong data-vagas-texto>8 vagas livres</strong> de 60</p>
+                  <div class="grupo-botoes">
+                    <button class="btn btn--secundario btn--amigavel" type="button" onclick="mostrarNoMapa('igreja')">Ver no mapa</button>
+                    <a class="btn btn--secundario btn--amigavel" href="https://www.google.com/maps/dir/?api=1&amp;destination=Igreja%2C%20Parque%20Burnier%2C%20Juiz%20de%20Fora%20-%20MG&amp;travelmode=walking" target="_blank" rel="noopener">Rota no Google Maps</a>
+                  </div>
+                </li>
+                <li class="cartao abrigo-item" data-aberto="sim" data-vagas="105" data-acessivel="nao" data-animais="sim">
+                  <h3>Centro Comunitário (exemplo)</h3>
+                  <p class="texto-apoio">Linhares · 3,4 km · aceita animais de estimação</p>
+                  <p><strong data-vagas-texto>105 vagas livres</strong> de 200</p>
+                  <div class="grupo-botoes">
+                    <button class="btn btn--secundario btn--amigavel" type="button" onclick="mostrarNoMapa('centro')">Ver no mapa</button>
+                    <a class="btn btn--secundario btn--amigavel" href="https://www.google.com/maps/dir/?api=1&amp;destination=Linhares%2C%20Juiz%20de%20Fora%20-%20MG&amp;travelmode=walking" target="_blank" rel="noopener">Rota no Google Maps</a>
+                  </div>
+                </li>
+                <li class="cartao abrigo-item" data-aberto="sim" data-vagas="80" data-acessivel="sim" data-animais="sim">
+                  <h3>Salão Paroquial (exemplo)</h3>
+                  <p class="texto-apoio">Grama · 6 km · acessível · aceita animais de estimação</p>
+                  <p><strong data-vagas-texto>80 vagas livres</strong> de 120</p>
+                  <div class="grupo-botoes">
+                    <button class="btn btn--secundario btn--amigavel" type="button" onclick="mostrarNoMapa('salao')">Ver no mapa</button>
+                    <a class="btn btn--secundario btn--amigavel" href="https://www.google.com/maps/dir/?api=1&amp;destination=Grama%2C%20Juiz%20de%20Fora%20-%20MG&amp;travelmode=walking" target="_blank" rel="noopener">Rota no Google Maps</a>
+                  </div>
+                </li>
+                <li class="cartao cartao--desabilitado abrigo-item" data-aberto="nao" data-vagas="0" data-acessivel="sim" data-animais="nao">
+                  <h3>Ginásio (exemplo)</h3>
+                  <p>Vila Ideal · fechado para reforma até março.</p>
+                </li>
+              </ul>
+              <p class="texto-apoio" id="abrigos-vazio" hidden>Nenhum abrigo com essa característica agora. Escolha outra opção ou ligue 199.</p>
+            </section>
+          </div>
+
+          <aside class="coluna coluna--lateral">
+
+            <!-- 4. Áreas de risco com botões de mostrar/ocultar -->
+            <section class="coluna" aria-labelledby="titulo-areas" style="gap: var(--espaco-3)">
+              <h2 id="titulo-areas" style="font-size: var(--texto-subtitulo)">Áreas de risco mapeadas</h2>
+              <ul class="lista-registros lista-limpa">
+                <li class="cartao">
+                  <h3>Parque Burnier · encosta</h3>
+                  <p class="texto-apoio">Risco de deslizamento · seu bairro</p>
+                  <button class="btn btn--secundario btn--amigavel" type="button" id="botao-area-burnier" aria-expanded="false" aria-controls="area-burnier" onclick="alternarInformacao('botao-area-burnier', 'area-burnier')">Mostrar detalhes</button>
+                  <p id="area-burnier" hidden>Fique atento a rachaduras novas nas paredes, portas que emperram, árvores ou postes inclinados e água barrenta saindo do barranco. Se notar algo, saia de casa e ligue 199.</p>
+                </li>
+                <li class="cartao">
+                  <h3>Vila Ideal · beira do rio</h3>
+                  <p class="texto-apoio">Risco de alagamento</p>
+                  <button class="btn btn--secundario btn--amigavel" type="button" id="botao-area-vila" aria-expanded="false" aria-controls="area-vila" onclick="alternarInformacao('botao-area-vila', 'area-vila')">Mostrar detalhes</button>
+                  <p id="area-vila" hidden>A água sobe rápido quando chove forte na cabeceira do rio. Guarde documentos no alto, desligue a energia se a água entrar em casa e nunca atravesse rua alagada.</p>
+                </li>
+                <li class="cartao">
+                  <h3>Linhares · córrego</h3>
+                  <p class="texto-apoio">Risco de enxurrada</p>
+                  <button class="btn btn--secundario btn--amigavel" type="button" id="botao-area-linhares" aria-expanded="false" aria-controls="area-linhares" onclick="alternarInformacao('botao-area-linhares', 'area-linhares')">Mostrar detalhes</button>
+                  <p id="area-linhares" hidden>A enxurrada arrasta carros e pessoas. Fique longe do córrego e dos bueiros durante a chuva e não deixe crianças brincarem na água.</p>
+                </li>
+              </ul>
+            </section>
+
+            <!-- 5. Orientações de segurança -->
+            <section class="cartao cartao--ceu" aria-labelledby="titulo-orientacoes">
+              <h2 id="titulo-orientacoes">Orientações de segurança</h2>
+              <button class="btn btn--secundario btn--amigavel" type="button" id="botao-antes" aria-expanded="false" aria-controls="orientacao-antes" onclick="alternarInformacao('botao-antes', 'orientacao-antes')">Mostrar: antes da chuva</button>
+              <ul id="orientacao-antes" class="orientacoes" hidden>
+                <li>Conheça o caminho até o abrigo mais próximo.</li>
+                <li>Monte a mochila de emergência: documentos, remédios, lanterna, água e carregador.</li>
+                <li>Combine com a família um ponto de encontro.</li>
+              </ul>
+              <button class="btn btn--secundario btn--amigavel" type="button" id="botao-durante" aria-expanded="false" aria-controls="orientacao-durante" onclick="alternarInformacao('botao-durante', 'orientacao-durante')">Mostrar: durante a chuva</button>
+              <ul id="orientacao-durante" class="orientacoes" hidden>
+                <li>Se houver alerta, saia da encosta e vá para o abrigo.</li>
+                <li>Não atravesse ruas alagadas, nem a pé nem de carro.</li>
+                <li>Avise quem mora perto e não tem celular.</li>
+              </ul>
+              <button class="btn btn--secundario btn--amigavel" type="button" id="botao-depois" aria-expanded="false" aria-controls="orientacao-depois" onclick="alternarInformacao('botao-depois', 'orientacao-depois')">Mostrar: depois da chuva</button>
+              <ul id="orientacao-depois" class="orientacoes" hidden>
+                <li>Só volte para casa quando a Defesa Civil liberar.</li>
+                <li>Não mexa em fios caídos e evite contato com a água da enchente.</li>
+                <li>Relate rachaduras e estragos pelo app ou pelo 199.</li>
+              </ul>
+            </section>
+
+            <section class="cartao" aria-labelledby="titulo-contatos">
+              <h2 id="titulo-contatos">Telefones de emergência</h2>
+              <a class="btn btn--socorro btn--bloco" href="tel:199">Defesa Civil · 199</a>
+              <a class="btn btn--secundario btn--bloco" href="tel:193">Bombeiros · 193</a>
+              <a class="btn btn--secundario btn--bloco" href="tel:192">SAMU · 192</a>
+            </section>
+          </aside>
+        </div>
+      </main>
+
+      <footer class="rodape">
+        <div class="container rodape__inner">
+          <span>Protótipo · Digital Nomads · dados fictícios</span>
+          <nav aria-label="Telas do protótipo">
+            <a href="cadastro.html">Cadastro</a>
+            <a href="alerta.html">Simular alerta</a>
+            <a href="painel.html">Painel da Defesa Civil</a>
+            <a href="componentes.html">Componentes</a>
+          </nav>
+        </div>
+      </footer>
+
+      <nav class="tabbar" aria-label="Navegação principal">
+        <a href="index.html">
+          <img src="img/icones/tab-inicio.svg" alt="" width="24" height="24">
+          Início
+        </a>
+        <a href="dashboard.html" aria-current="page">
+          <img src="img/icones/tab-mapa-ativo.svg" alt="" width="24" height="24">
+          Mapa
+        </a>
+        <a href="missao.html">
+          <img src="img/icones/tab-missoes.svg" alt="" width="24" height="24">
+          Missões
+        </a>
+        <a href="perfil.html#ranking">
+          <img src="img/icones/tab-ranking.svg" alt="" width="24" height="24">
+          Ranking
+        </a>
+        <a href="perfil.html">
+          <img src="img/icones/tab-perfil.svg" alt="" width="24" height="24">
+          Perfil
+        </a>
+      </nav>
+    </div>
+  </body>
+</html>
